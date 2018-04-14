@@ -1,20 +1,47 @@
-<html>  
-    <head>  
-        <meta charset="utf-8" />  
-        <title></title>  
-    </head>  
-    <body>  
-        <div id="father"><div>01</div><div>02</div><div>03</div></div>  
-         <div id="father1"> <div>01</div><div>02</div><div>03</div></div>  
-           <div id="father2"> 
-           <div>01</div><div>02</div><div>03</div></div>  
-        <script type="text/javascript">  
-            // console.log(document.getElementById("father").children); 
-             console.log(document.getElementById("father1").children); 
-              // console.log(document.getElementById("father2").children);  
-               // console.log(document.getElementById("father").childNodes);  
-                console.log(document.getElementById("father1").childNodes);  
-                 // console.log(document.getElementById("father2").childNodes);  
-        </script>  
-    </body>  
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title></title>
+</head>
+<body>
+    <p>
+        [part 1]
+        这个 childNodes是正统属性   亲生的<br>
+        而这个children是野孩子<br>
+        这个野孩子比较随意   所以用它返回来的就只有DOM元素了  其他的文字啥的   都不返回<br>
+        而 childNodes比较讲究   事无巨细  都要返回来<br>
+    </p>
+    <p>
+        [part 2]<br>
+        children野孩子 <br>
+        得了几乎所有浏览器的支持    如果你想要DOM节点  直接用野孩子
+    </p>
+    <p>
+        [part 3]<br>
+        亲生娃儿childNodes心太细了   啥都给你返回来了 <br>
+        我在那个father1后面加了个空格[换行符也行]  结果呢
+        childNodes就返回来了四个长度的数组 ....好吧  很乖
+    </p>
+    <div id="father">
+        <div>01</div>
+        <div>02</div>
+        <div>03</div>
+    </div>
+    <div id="father1" style="background-color: aquamarine">
+        <div>01</div> <div>02</div><div>03</div>
+    </div>
+    <div id="father2">
+        <div>01</div>
+        <div>02</div>
+        <div>03</div>
+    </div>
+    <script type="text/javascript">
+        console.log(document.getElementById("father").children);
+        // console.log(document.getElementById("father1").children);
+        // console.log(document.getElementById("father2").children);
+        console.log(document.getElementById("father").childNodes);
+        // console.log(document.getElementById("father1").childNodes);
+        // console.log(document.getElementById("father2").childNodes);
+    </script>
+</body>
 </html>  
