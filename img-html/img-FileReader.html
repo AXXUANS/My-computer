@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FileReader对象</title>
+</head>
+<body>
+    <h2>使用FileReader对象，web应用程序可以异步的读取存储在用户计算机上的文件(或者原始数据缓冲)内容，可以使用File对象或者Blob对象来指定所要处理的文件或数据。</h2>
+    <h3>创建实例 <br>var reader = new FileReader();</h3>
+    <h3><a href="https://www.cnblogs.com/hhhyaaon/p/5929492.html">参考案列</a></h3>
+    <input type="file" id="file">
+    <div>
+        <img src="" id="file_img" alt="">
+    </div>
+    <script>
+        /*FileReader通过异步的方式读取文件内容，结果均是通过事件回调获取，下面是一个读取本地txt文件内容的例子：*/
+        var input  = document.getElementById("file"); //input file
+        // input.onchange = function(){
+        //     var file = this.files[0];
+        //     if(!!file){
+        //         //读取本地文件，以gbk编码方式输出
+        //         var reader = new FileReader();
+        //         // reader.readAsText(file,"gbk");
+        //         reader.readAsText(file,"utf-8");
+        //         // reader.readAsDataURL(file);
+        //         reader.onload = function(){
+        //             //读取完毕后输出结果
+        //             console.log(this.result);
+        //             //查看文件内容字节大小
+        //             console.log(new Blob([this.result]))
+        //         }
+        //     }
+        // }
+        /*在线预览本地文件*/
+        input.onchange = function(){
+        var file = this.files[0];
+        if(!!file){
+            var reader = new FileReader();
+            // 图片文件转换为base64
+            reader.readAsDataURL(file);
+            reader.onload = function(){
+                // 显示图片
+                document.getElementById("file_img").src = this.result;
+
+            }
+        }
+        }
+
+    </script>
+</body>
+</html>
