@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js插件编写</title>
+</head>
+<body>
+<form action="">
+
+    <p>邮箱：
+        <input type="text" data-dr-regexp="^\w+@\w+\.\w+$"
+                   data-dr-regexp-message="邮箱不合法"
+                   data-dr-required=true
+                   data-dr-required-message="邮箱不能为空">
+
+    </p>
+    <p>手机号：
+        <input type="text" placeholder="请输入合法的手机号码"
+               data-dr-regexp="^1\d{10}$"
+               data-dr-regexp-message="手机号码不合法"
+               data-dr-required=true
+               data-dr-required-message="手机号码不能为空"
+        >
+    </p>
+    <p>密码：
+        <input type="password"
+               data-dr-regexp="^\w+$"
+               data-dr-regexp-message="密码不合法"
+               data-dr-required=true
+               data-dr-required-message="密码不能为空"
+               data-dr-min-length=6
+               data-dr-min-length-message="密码不能少于6个字符"
+               placeholder="请输入密码"
+        >
+    </p>
+   <p>
+       重新输入密码：
+       <input type="password"
+              data-dr-confirm=true
+              data-dr-confirm-message="两次输入密码不一致"
+              data-dr-required=true
+              data-dr-required-message="密码不能为空">
+    </p>
+
+</form>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="dataResult.js"></script>
+<script>
+ $("form").detaResult({
+     // initEvent:"blur"
+     })
+ $.fn.detaResult.extendResult({
+     "max-length":function (data) {
+         console.log(data);
+         return this.val().length<=data;
+     }
+ })
+</script>
+</body>
+</html>
