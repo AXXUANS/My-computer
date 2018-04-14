@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8>
+    <title>拖动测试</title>
+    <style>
+        ul{
+            list-style-type: none;
+            width: 600px;
+            height: 800px;
+            box-sizing: border-box;
+            border:1px solid black;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            padding: 0;
+            margin: auto;
+            position: relative;
+            margin-top:20px;
+        }
+        li{
+            list-style:none;
+            height: 100px;
+            width:  600px;
+            background-color: green;
+            box-sizing: border-box;
+            border-bottom: 1px solid blue;
+            float: left;
+            cursor: move;
+        }
+        .animLi{
+            background-color: white;
+            height: 100px;
+        }
+        @keyframes anmi
+        {
+            from {height:20px}
+            to {height:100px}
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li index=1>孙悟空</li>
+    <li index=2>孙悟空</li>
+    <li index=3>孙悟空</li>
+    <li index=4>孙悟空</li>
+    <li index=5>孙悟空</li>
+    <li index=6>孙悟空</li>
+    <li index=1>孙悟空</li>
+    <li index=2>孙悟空</li>
+    <li index=3>孙悟空</li>
+    <li index=4>孙悟空</li>
+    <li index=5>孙悟空</li>
+    <li index=6>孙悟空</li>
+    <li index=1>孙悟空</li>
+    <li index=2>孙悟空</li>
+    <li index=3>孙悟空</li>
+    <li index=4>孙悟空</li>
+    <li index=5>孙悟空</li>
+    <li index=6>孙悟空</li>
+    <li index=1>孙悟空</li>
+    <li index=2>孙悟空</li>
+    <li index=3>孙悟空</li>
+    <li index=4>孙悟空</li>
+    <li index=5>孙悟空</li>
+    <li index=6>孙悟空</li>
+    <li index=1>孙悟空</li>
+    <li index=2>孙悟空</li>
+    <li index=3>孙悟空</li>
+    <li index=4>孙悟空</li>
+    <li index=5>孙悟空</li>
+    <li index=6>孙悟空</li>
+</ul>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+    //去掉鼠标选中文字的事件
+    if(document.all){
+        document.onselectstart= function(){return false;}; //for ie
+    }else{
+        document.onmousedown= function(){return false;};
+        document.onmouseup= function(){return true;};
+    }
+    document.onselectstart = new Function('event.returnValue=false;');
+
+    $("li").on("mousedown",drag);
+
+    function drag(ev){
+        //鼠标距离顶部的高度，用于计算移动后的高度差
+        var mouseTop = ev.pageY;
+
+        //节点距离顶部的高度和宽度,用于绝对定位
+        var nodeTop = $(this).offset().top;
+        var nodeLeft = $(this).offset().left;
+        console.log(mouseTop+":"+nodeTop);
+
+        //第一步，记录是否第一个或者最后一个节点
+        var prevNode = $(this).prev();
+        var nextNode = $(this).next();
+        if(prevNode.length==0){
+            nextNode.before("<li class='animLi'>六耳猕猴</li>");
+        }else{
+            prevNode.after("<li class='animLi'>六耳猕猴</li>");
+        }
+        //把当前css改成fixed，不用absolute防止relative问题
+        $(this).css({"position":"fixed","left":nodeLeft,"top":nodeTop,"opacity":0.5});
+        //在节点原先呆的位置上补一个假的
+
+        //第二步，绑定mousemove事件，判断鼠标移动是否超过Li.height
+        $(this).on("mousemove",function(ev){
+            ifPassHalf(ev,mouseTop,$(this),nodeTop,$("ul").scrollTop())
+        });
+
+        //第三步，解绑mousemove事件，绑定mouseup事件
+        $(this).on("mouseup",putNodeDown);
+
+        //修复鼠标移动过快移出div的bug
+        $("li").on("mouseout",function(){
+            $(".animLi").hide();
+            $(".animLi").after($(this));
+            $(this).removeAttr("style");
+            $(this).off("mousemove");
+            $(".animLi").remove();
+            $("li").off("mouseout");
+            alert("请规范操作，鼠标不要超出拖拽区域");
+        });
+    }
+
+    function ifPassHalf(ev,mouseTop,node,nodeTop,scrollTop){
+        node.css("top",nodeTop+ev.pageY - mouseTop);
+        var newscrollTop = scrollTop;
+        var zNodeTop = node.offset().top;
+        var jNodeTop = $(".animLi").offset().top;
+        var ifPassHalf = zNodeTop - jNodeTop;
+        //第1层判断，判断鼠标是否超出ul框，不让节点移出ul的上边界和下边界
+        if(parseInt(node.offset().top) <= parseInt(node.parent().offset().top)){
+            node.css("top",node.parent().offset().top+30);
+            //该事件在节点碰到顶部边界的时候触发,把滚动条移动加进去
+            $(".animLi").prev().before($(".animLi"));
+            newscrollTop = scrollTop - parseInt(node.height());
+        }else if((node.offset().top-node.parent().height()+parseInt(node.height())) >= parseInt(node.parent().offset().top)){
+            node.css("top",parseInt(node.parent().offset().top)+parseInt(node.parent().height())-node.height()-30);
+            //该事件在节点碰到底部边界的时候触发,把滚动条移动加进去
+            $(".animLi").next().after($(".animLi"));
+            newscrollTop = scrollTop + parseInt(node.height());
+        }else{
+            if(ifPassHalf>51){
+                $(".animLi").next().after($(".animLi"));
+            }else if(ifPassHalf<-51){
+                $(".animLi").prev().before($(".animLi"));
+            }
+        }
+        node.parent().scrollTop(newscrollTop);
+    }
+
+    function putNodeDown(ev){
+        $(".animLi").hide();
+        $(".animLi").after($(this));
+        $(this).removeAttr("style");
+        //把mousemove mouseout事件解绑了
+        $(this).off("mousemove");
+        $("li").off("mouseout");
+        //把六耳猕猴让给孙悟空
+        $(".animLi").remove();
+    }
+</script>
+</body>
+</html>

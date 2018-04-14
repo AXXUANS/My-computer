@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function countNum(x){
+        if(x==1){return 1}      //函数输入1直接返回1
+        var arr=[[1],[1,1]]     //定义数组初始值
+        for(var i=2;i<x+1;i++){ //从第三行开始创建数据
+            arr[i]=[]
+            arr[i].push(1)      //每一行第一个默认为0
+            for(var j=1;j<i;j++){   //从每一行第二列开始遍历
+                arr[i].push(arr[i-1][j-1]+arr[i-1][j])
+                //每个数字，都等于它上方（如果有的话）与左上方两个数字之和
+            }
+            arr[i].push(1)      //每一行最后一个也是1
+            if(arr[i].indexOf(x)>0){    //完成一行遍历后，查看这一行中有没有需要的数
+                console.log(arr)
+                return i+1
+            }
+        }
+    }
+    console.log(countNum(10))
+
+</script>
+</body>
+</html>

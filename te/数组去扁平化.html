@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组去扁平化</title>
+</head>
+<body>
+<script>
+    var arr = [[1,2,2],[3, 4, 5, 5],[6, 7, 8, 9,[11,12,[12,13,[14]]]],10];
+    var newArr=[ ];
+    function changeArr(arr){
+        for(var i=0;i<arr.length;i++){
+            //遍历arr数组得每一个元素,这里也可以用forEach
+            if(arr[i] instanceof Array){
+                //判断元素是否为数组
+                changeArr(arr[i])
+                //元素为数组则继续调用changeArr方法遍历
+            }else{
+                newArr.push(arr[i])
+                //元素不是数组则可以直接push进新数组
+            }
+        }
+        //此上的判断也可以直接用三元表达式
+    }
+    changeArr(arr);
+    console.log(newArr);
+    //所得newArr= [1,2,2,3, 4, 5, 5,6, 7, 8, 9,11,12,12,13,14,10]
+    var resultArr=[ ];
+    resultArr.push(newArr[0]);
+    //newArr第一个元素肯定是要放进新数组滴
+    for(var j=1;j<newArr.length;j++){
+        if(resultArr.indexOf(newArr[j])==-1){
+            //判断resultArr数组中是否已含有newArr[j]
+            var flag=true;
+            //这个小技巧稍后详解
+            for(var x=0,length=resultArr.length;x<length;x++){
+                //遍历resultArr
+                if(newArr[j]<resultArr[x]){
+                    //判断resultArr中是否有元素大于newArr[j]的元素，如果有，则将该元素插入第一个大于它的元素前，否则进入下一次循环，如果所有元素都没有newArr[j]大，那么flag就没有被修改，在循环外面就会把newArr[j]push到resultArr的最后
+                    var newIndex=x;
+                    //获取resultArr中大于newArr元素的index
+                    resultArr.splice(newIndex,0,newArr[j])
+                    //将newArr[j]插入result数组index位置
+                    flag=false;
+                    break;
+                }
+            }
+            if(flag){
+                resultArr.push(newArr[j])
+                //这里的flag主要是为了防止newArr中的元素被重复push,当newArr中元素满足resultArr.indexOf(resultArr[j])==-1，但是不满足newArr[j]<resultArr[x]时，就是被直接push到resultArr数组最后
+            }
+        }
+    }
+    console.log(resultArr);
+/*方案一（仅去重）：*/
+    // var rusultArr=newArr.reduce(function(rusultArr,a){
+    //     if(rusultArr.indexOf(a)==-1){
+    //         rusultArr.push(a)
+    //     }
+    //     return rusultArr
+    // },[])
+    /*方案二（去重加排序）：*/
+    rusultArr=Array.from(new Set(newArr)).sort(function(a,b){return a-b})
+    console.log(resultArr);
+   var a=arr.toString().split(',').filter((ele,index,array)=>{
+        return index === array.indexOf(ele)
+    }).sort((a,b)=>a-b)
+    console.log(a);
+</script>
+</body>
+</html>
