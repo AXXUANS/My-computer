@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <!--<script src="index2.js"></script>-->
+    <script src="index3.js"></script>
+</head>
+<body>
+<div>
+    /*扩展性！！！！*/
+    //给任意对象扩展    扩展obj1  检索 obj2  obj3  后面的检索的值赋给第一个   重复的沿用最后一个  没有的扩展
+    $.extend(obj1,obj2,obj3)//
+    //给jq扩展
+    $.entend({
+        getName:function () {
+
+        }
+    });
+    // $.getName
+    //给jq实例对象扩展  $.fn=jquery.prototype
+    $.fn.entend({
+        setName:function () {
+
+        }
+    });
+    // $().setName
+</div>
+</body>
+</html>

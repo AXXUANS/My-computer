@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    var name="a";
+    function getName() {
+        console.log(this);
+        return this.name;
+    }
+    var obj={
+        name:"B",
+        showName:function (a) { //       arguments = [getName,1]
+            console.log(getName()); //A
+            console.log(a()); //A
+            console.log(arguments[0]());  //undefined
+        }
+    }
+    obj.showName(getName,1)
+</script>
+</body>
+</html>

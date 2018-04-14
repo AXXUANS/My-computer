@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js单例模式</title>
+</head>
+<body>
+<!--<script>-->
+    <!--var SingleInstanceTest=(function () {-->
+        <!--var _Instace=null;-->
+        <!--var _default={};-->
+       <!--function init(ops) {-->
+           <!--for(var prop in ops){-->
+               <!--_Instace[prop]=ops[prop];-->
+           <!--}-->
+       <!--}-->
+        <!--return function (ops=_default) {-->
+            <!--ops=ops||{};-->
+            <!--console.log("进入构造函数 ");-->
+            <!--if(_Instace==null){-->
+                <!--_Instace=this;-->
+                <!--console.log("第一次new 局部变量  _Instance为null");-->
+                <!--// for(var prop in ops){   封装成init-->
+                <!--//     _Instace[prop]=ops[prop];-->
+                <!--// }-->
+                <!--init.call(_Instace,ops);-->
+                <!--return _Instace;-->
+            <!--}else {-->
+                <!--console.log("不是第一次new 局部变量（实例）  _Instance不为null 直接返回");-->
+                <!--init.call(_Instace,ops);-->
+                <!--return _Instace;-->
+            <!--}-->
+        <!--}-->
+    <!--})();-->
+    <!--//函数-->
+    <!--//构造器-->
+    <!--var i1=new SingleInstanceTest({name:"李四1"});-->
+    <!--var i2=new SingleInstanceTest({name:"李四"});/**/-->
+    <!--i2.name="王五";-->
+    <!--console.log(i1===i2);-->
+    <!--console.log(i2.name);-->
+<!--</script>-->
+<!--<script>-->
+    <!--var SingleInstanceTest=(function () {-->
+        <!--var _Instace=null;-->
+        <!--var _default={};-->
+        <!--function SingleInstance (ops=_default) {-->
+            <!--console.log("进入构造函数 ");-->
+            <!--if(_Instace==null){-->
+                <!--console.log("第一次new 局部变量  _Instance为null");-->
+                <!--this.init(ops);-->
+                <!--return _Instace=this;-->
+            <!--}else {-->
+                <!--console.log("不是第一次new 局部变量（实例）  _Instance不为null 直接返回");-->
+                <!--_Instace.init(ops);-->
+                <!--return _Instace;-->
+            <!--}-->
+        <!--}-->
+        <!--SingleInstance.prototype.init=function(ops) {-->
+            <!--for(var prop in ops){-->
+                <!--this[prop]=ops[prop];-->
+            <!--}-->
+        <!--};-->
+        <!--// SingleInstance.prototype.aaa=function(ops) {-->
+        <!--// };-->
+        <!--return SingleInstance;-->
+    <!--})();-->
+    <!--//函数-->
+    <!--//构造器-->
+    <!--var i1=new SingleInstanceTest({name:"李四"});-->
+    <!--var i2=new SingleInstanceTest({name:"李四"});/**/-->
+    <!--// i2.name="王五";-->
+    <!--console.log(i1===i2);-->
+    <!--console.log(i2.name);-->
+<!--</script>-->
+<script>
+    var SingleInstanceTest=(function () {
+        var _Instace=null;
+        var _default={name:"无名氏",age:18};
+        function SingleInstance (ops=_default) {
+            if(this instanceof SingleInstance){
+                if(_Instace==null){
+                    this.init(ops);
+                    return _Instace=this;
+                }else {
+                    _Instace.init(ops);
+                    return _Instace;
+                }
+            }else {
+                if(_Instace==null){
+                    _Instace=new SingleInstance();
+                    _Instace.init(ops);
+                    return _Instace;
+                }else {
+                    _Instace.init(ops);
+                    return _Instace;
+                }
+            }
+
+        }
+        SingleInstance.prototype.init=function(ops) {
+            for(var prop in ops){
+                this[prop]=ops[prop];
+            }
+        };
+        // SingleInstance.prototype.aaa=function(ops) {
+        // };
+        return SingleInstance;
+    })();
+    //函数
+    //构造器
+    var i0=SingleInstanceTest({name:"张三"});
+    var i1=new SingleInstanceTest({name:"李四"});
+    var i2=new SingleInstanceTest({name:"王五",age:25});/**/
+    // i2.name="王五";
+    // console.log(i0===i1);
+    // console.log(i2===i1);
+    console.log(i1.age);
+    console.log(i2.age);
+
+</script>
+</body>
+</html>

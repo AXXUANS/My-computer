@@ -1,0 +1,8 @@
+[
+    {"name":"张三","number":12,"date":"2014.3.3","position":"工程师","tel":14335435543},
+    {"name":"李四","number":12,"date":"2014.3.3","position":"工程师","tel":14335435543},
+    {"name":"王五","number":12,"date":"2014.3.3","position":"工程师","tel":14335435543},
+    {"name":"赵六","number":12,"date":"2014.3.3","position":"工程师","tel":14335435543},
+    {"name":"小七","number":12,"date":"2014.3.3","position":"工程师","tel":14335435543},
+    {"name":"大八","number":12,"date":"2014.3.3","position":"工程师","tel":14335435543}
+]

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS高性能模板渲染</title>
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.css">
+</head>
+<body>
+    <table id="tableData" cellpadding="0" cellspacing="0" class="table table-bordered" >
+        <tr>
+            <td>公号</td>
+            <td>名字</td>
+            <td>手机号</td>
+            <td>职位</td>
+            <td>入职日期</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    <script>
+        /*
+        * Ajax\ Jquery(重复工作)*/
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if(xhr.status==200) {
+                if (xhr.readyState == 4) {
+                    var data = JSON.parse(xhr.responseText);
+                    console.log(data);
+
+                    var dataHtml="";
+                    for (var i= 0 ;i<data.length;i++){
+                        dataHtml +='<tr>\n' +
+                        '            <td>'+data[i].number+'</td>\n' +
+                        '            <td>'+data[i].name+'</td>\n' +
+                        '            <td>'+data[i].tel+'</td>\n' +
+                        '            <td>'+data[i].position+'</td>\n' +
+                        '            <td>'+data[i].date+'</td>\n' +
+                        '        </tr>';
+
+                    }
+                    document.getElementById("tableData").innerHTML=dataHtml;
+                }
+            }
+        };
+        xhr.open("get","1.json",false);
+        xhr.send(null);
+    </script>
+</body>
+</html>

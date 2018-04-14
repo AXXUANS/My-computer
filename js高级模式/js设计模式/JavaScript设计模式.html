@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript设计模式</title>
+</head>
+<body>
+<script type="text/javascript">
+/*
+        1、设计模式较为规范
+* */
+//例一  表单：验证两个input 一个用户名 一个密码
+    //是两个全局对象 而他属于一个表单的验证  重复浪费
+    //对象封装  会出现对像过多  注意全局对象
+/* var checkObj={
+
+     checkName:function () {},
+     checkPassword:function() {}
+ }*/
+    //从方法外部访问方法内部的变量
+    // var a;
+    // function demo() {
+    //     a=10;
+    // }
+    // 得到a的值
+    // 如果把对象或方法全部暴露在外面，全局不利于性能、避免全局污染
+    // function test() {
+    //     var a = function () {
+    //     }
+    //     var b = function () {
+    //     }
+    //     return {a:a ,b:b}
+    // }
+    // 当出现两个或多个test（）方法  js文件后面的会覆盖之前的
+    //解决方法  闭包： jq实现方法就是闭包
+    //    闭包结构
+    // (function () {
+    //     console.log(11);
+    // })()//自执行函数
+</script>
+</body>
+</html>

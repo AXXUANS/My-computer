@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript设计模式2</title>
+</head>
+<body>
+<script>
+
+    var shoeObj={};//定义发布者
+    shoeObj.list=[];//存储订阅者的（买家）的对象
+
+    shoeObj.listen=function (key,fn) {//在订阅的时候给一个标识
+        if(!this.list[key]){//如果this.list[key]发布的人的名称不存在  给给他空
+            this.list[key]=[];
+        }
+        shoeObj.list[key].push(fn);
+    };
+    shoeObj.triger=function () {//发布的时候认识知道订阅的消息分别发布给谁？  根据名字发布消息
+        //取到消息名称
+        var key=Array.prototype.shift.call(arguments);//取出消息类型名称
+        console.log(key);
+        var fns = this.list[key];//对应的回调函数
+        if (!fns || fns.length === 0) {
+            return;
+        }
+        for (var i = 0, fn; fn = fns[i++];) {
+            fn.apply(this,arguments);
+        }
+    };
+
+    shoeObj.listen("red", function (color, size) {
+        console.log("颜色是：" + color);
+    });
+    shoeObj.listen("block", function (color, size) {
+        console.log("再次输出颜色是：" + color);
+    });
+    shoeObj.triger("red","红色");
+    shoeObj.triger("block","黑色");
+
+
+    // shoeObj.listen(function (color,size) {
+    //     console.log("颜色是："+color);
+    //     console.log("尺码是："+size);
+    // });
+    // shoeObj.listen(function (color,size) {
+    //     console.log("再次输出颜色是："+color);
+    //     console.log("再次输出尺码是："+size);
+    // })
+    // shoeObj.triger("红色",39);
+    // shoeObj.triger("黑色",39);
+</script>
+</body>
+</html>
