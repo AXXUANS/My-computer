@@ -1,11 +1,11 @@
 # My-computer
 我的电脑上的测试文件
 
-dialogue----一个简单的对话框、
+Dialogue----一个简单的对话框、
 
-img——html 图片缩放不失真
+Img——html 图片缩放不失真
 
-js高级中有各种设计模式
+Js高级中有各种设计模式
 	arguments 
 		1.arguments this指向
 		2.arguments 含义   解：代指函数中所有形参
@@ -16,8 +16,11 @@ js高级中有各种设计模式
 	es十大常用改变
 	js单例模式
 	
+	
 Movie
 	ajax_jsonp 获取豆瓣的电影信息
+	
+	
 	
 面试中 
   te= 
