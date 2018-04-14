@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>react.js 3</title>
+		 <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+		<script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+		<script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+	</head>
+	<body>
+		<div id="box">
+		div
+		</div>
+		<script type="text/babel">
+            var style={
+                color:"red"
+            }
+			var Hello = React.createClass({
+
+				getInitialState:function () {
+					return{
+                        list:[
+                            {value:"aaa",type:"complete"},
+                            {value:"bbb",type:"active"},
+                            {value:"ccc",type:"complete"},
+                            {value:"ddd",type:"active"},
+						],
+						value:"111",type:"active"
+					}
+                },
+
+			    render:function(){
+			        var a="世界你好";
+			        var nodes=[];
+			        var that=this;
+			        if(that.state.type=="all"){
+                        nodes=this.state.list.map(function (n,i) {
+                            /*map方法返回一个由原数组中的每个元素调用一个指定方法后的返回值组成的新数组。*/
+                            /*i为索引*/
+                            return(
+                                <li>
+							   <span
+                                   onClick={that.taggleType.bind(that,i)}
+                                   style={{textDecoration:n.type=="active"?"none":"line-through"}}>
+								   {n.value}
+								   </span>
+
+                                    <button onClick={that.handleDelete.bind(that,i)}>delete</button>
+
+                                </li>
+                            )
+                            /*that.handleDelete(i)这里是函数的执行   就是调用*/
+                        })
+					}
+                    if(that.state.type=="active"){
+                        nodes=this.state.list.map(function (n,i) {
+                            /*map方法返回一个由原数组中的每个元素调用一个指定方法后的返回值组成的新数组。*/
+                            /*i为索引*/
+                            if(n.type=="active"){
+                                return(
+                                    <li>
+									   <span
+										   onClick={that.taggleType.bind(that,i)}
+										   style={{textDecoration:n.type=="active"?"none":"line-through"}}>
+										   {n.value}
+										</span>
+
+                                        <button onClick={that.handleDelete.bind(that,i)}>delete</button>
+
+                                    </li>
+                                )
+							}else {
+                                return ""
+							}
+
+                            /*that.handleDelete(i)这里是函数的执行   就是调用*/
+                        })
+                    }
+
+
+                    if(that.state.type=="complete"){
+                        nodes=this.state.list.map(function (n,i) {
+                            /*map方法返回一个由原数组中的每个元素调用一个指定方法后的返回值组成的新数组。*/
+                            /*i为索引*/
+                            if(n.type=="complete"){
+                                return(
+                                    <li>
+									   <span
+                                           onClick={that.taggleType.bind(that,i)}
+                                           style={{textDecoration:n.type=="active"?"none":"line-through"}}>
+										   {n.value}
+										</span>
+
+                                        <button onClick={that.handleDelete.bind(that,i)}>delete</button>
+
+                                    </li>
+                                )
+                            }else {
+                                return ""
+                            }
+                            /*that.handleDelete(i)这里是函数的执行   就是调用*/
+                        })
+                    }
+				    return(
+				     	<div >
+                            hello {a}
+                            <input value={this.state.value} onChange={this.Change}/>
+							<button onClick={this.handleclick}>添加</button>
+                            <ul>{nodes}</ul>
+							<div>
+								{this.state.type}
+                                <button onClick={this.changeType.bind(this,"all")}>all</button>|
+                                <button onClick={this.changeType.bind(this,"active")}>active</button>|
+                                <button onClick={this.changeType.bind(this,"complete")}>complete</button>|
+							</div>
+                        </div>
+				    )
+			    },
+                Change:function (e) {
+					this.setState({
+						value:e.target.value
+					})
+                },
+                handleDelete:function (i) { /*alert("dada")*/
+                      var list=this.state.list;
+                      list.splice(i,1)
+                   		 this.setState({
+                          list:list
+                      })
+                },
+				handleclick:function () {
+					// alert("点击触发");
+					var list=this.state.list;
+					list.push(this.state.value);
+					this.setState({
+						list:list
+					})
+				},
+                changeType:function (type) {
+                    this.setState({
+                        type:type
+                    })
+                },
+                taggleType:function (i) {
+                    var list=this.state.list;
+					list[i].type=list[i].type=="active"?"complete":"active";
+                    this.setState({
+                        list:list
+                    })
+                }
+			});
+			// jq渲染方法
+			// var str="";
+			// for(var i=0;i<list.length;i++){
+			//     str +="<p>"+"</p>"
+			// }
+            // document.getElementById("box").innerHTML=str;
+			ReactDOM.render(
+				<Hello/>,/*虚拟dom*/
+				document.getElementById("box")
+            )
+		</script>
+	</body>
+</html>

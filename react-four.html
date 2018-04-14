@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>react.js 4</title>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="box">
+        div
+    </div>
+    <script type="text/babel">
+			var TodoInput= React.createClass({
+				render:function () {
+					return(
+					        <div>
+                              <input
+								value={this.props.value1}
+								onChange={this.props.change1}/>
+                                 <button onClick={this.props.handleclick1}>添加</button>
+						</div>
+				    	)
+                }
+			})
+            var TodoList= React.createClass({
+                render:functio  wn () {
+                    var nodes=[];
+                    var that=this;
+                    if(that.props.type1=="all"){
+                           nodes=this.props.list1.map(function (n,i) {
+                                /*map方法返回一个由原数组中的每个元素调用一个指定方法后的返回值组成的新数组。*/
+                            /*i为索引*/
+                            return(
+                                  <li>
+							   		<span
+									   onClick={that.props.taggleType1.bind(that,i)}
+									   style={{textDecoration:n.type=="active"?"none":"line-through"}}>
+									   {n.value}
+									</span>
+
+                                    <button onClick={that.props.handleDelete1.bind(that,i)}>delete</button>
+
+                                </li>
+                            )
+                            /*that.handleDelete(i)这里是函数的执行   就是调用*/
+                        })
+                    }
+                    if(that.props.type1=="active"){
+                        nodes=this.props.list1.map(function (n,i) {
+                            /*map方法返回一个由原数组中的每个元素调用一个指定方法后的返回值组成的新数组。*/
+                            /*i为索引*/
+                            if(n.type=="active"){
+                                return(
+                                    <li>
+									   <span
+                                           onClick={that.props.taggleType1.bind(that,i)}
+                                           style={{textDecoration:n.type=="active"?"none":"line-through"}}>
+										   {n.value}
+										</span>
+
+                                        <button onClick={that.props.handleDelete1.bind(that,i)}>delete</button>
+
+                                    </li>
+                                )
+                            }else {
+                                return ""
+                            }
+
+                            /*that.handleDelete(i)这里是函数的执行   就是调用*/
+                        })
+                    }
+
+
+                    if(that.props.type1=="complete"){
+                        nodes=this.props.list1.map(function (n,i) {
+                            /*map方法返回一个由原数组中的每个元素调用一个指定方法后的返回值组成的新数组。*/
+                            /*i为索引*/
+                            if(n.type=="complete"){
+                                return(
+                                    <li>
+									   <span
+                                           onClick={that.props.taggleType1.bind(that,i)}
+                                           style={{textDecoration:n.type=="active"?"none":"line-through"}}>
+										   {n.value}
+										</span>
+
+                                        <button onClick={that.props.handleDelete1.bind(that,i)}>delete</button>
+
+                                    </li>
+                                )
+                            }else {
+                                return ""
+                            }
+                            /*that.handleDelete(i)这里是函数的执行   就是调用*/
+                        })
+                    }
+                    return(
+                        <div>
+							{nodes}
+                        </div>
+                    )
+                }
+            })
+            var TodoAction= React.createClass({
+                render:function () {
+                    return(
+                        <div>
+                            {this.props.type1}
+                            <button onClick={this.props.changeType1.bind(this,"all")}>all</button>|
+                            <button onClick={this.props.changeType1.bind(this,"active")}>active</button>|
+                            <button onClick={this.props.changeType1.bind(this,"complete")}>complete</button>|
+                        </div>
+                    )
+                }
+            })
+
+			var Hello = React.createClass({
+				getInitialState:function () {
+					return{
+                        list:[
+                            {value:"aaa",type:"complete"},
+                            {value:"bbb",type:"active"},
+                            {value:"ccc",type:"complete"},
+                            {value:"ddd",type:"active"},
+						],
+						value:"111",type:"active"
+					}
+                },
+
+			    render:function(){
+			        var a="世界你好";
+
+				    return(
+				     	<div >
+                            hello {a}
+                            <TodoInput value1={this.state.value}
+									   change1={this.change}
+									   handleclick1={this.handleclick}/>
+
+                            <TodoList  type1={this.state.type}
+									   list1={this.state.list}
+                                       taggleType1={this.taggleType}
+									   handleDelete1={this.handleDelete}/>
+
+                            <TodoAction type1={this.state.type}
+										changeType1={this.changeType}/>
+                        </div>
+				    )
+			    },
+                change:function (e) {
+					this.setState({
+						value:e.target.value
+					})
+                },
+                handleDelete:function (i) { /*alert("dada")*/
+                      var list=this.state.list;
+                      list.splice(i,1)
+                   		 this.setState({
+                          list:list
+                      })
+                },
+				handleclick:function () {
+					// alert("点击触发");
+					var list=this.state.list;
+					list.push({value:this.state.value,type:"active"});
+					this.setState({
+						list:list
+					})
+				},
+                changeType:function (type) {
+                    this.setState({
+                        type:type
+                    })
+                },
+                taggleType:function (i) {
+                    var list=this.state.list;
+					list[i].type=list[i].type=="active"?"complete":"active";
+                    this.setState({
+                        list:list
+                    })
+                }
+			});
+			ReactDOM.render(
+				<Hello/>,/*虚拟dom*/
+				document.getElementById("box")
+            )
+		</script>
+</body>
+
+</html>

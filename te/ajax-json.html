@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+
+    <title>ajax里json的调用</title>
+</head>
+<body>
+<div id="e"></div>
+<script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+
+    // var user = {
+    // "username": "HelloWorld"
+    //     };
+    //
+    // $.ajax({
+    //     url: "https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su",
+    //     type: "POST",
+    //     contentType: "application/json; charset=utf-8",
+    //     dataType: "json",  //json不支持跨域请求,只能使用jsonp
+    //     data: {
+    //         user: JSON.stringify(user)
+    //     },
+    //     success: function (data) {
+    //         console.log(data);
+    //         // $("#user_name")[0].innerHTML = data.user_name;
+    //         // $("#user_teleNum")[0].innerHTML = data.user_teleNum;
+    //         // $("#user_ID")[0].innerHTML = data.user_ID;
+    //     },
+    //     error: function () {
+    //         alert("请求超时错误!");
+    //     }
+    // // })
+    // $.ajax({
+    //     url: 'http://www.domain2.com:8080/login',
+    //     type: 'get',
+    //     dataType: 'jsonp', // 请求方式为jsonp
+    //     jsonpCallback: "onBack", // 自定义回调函数名
+    //     data: {},
+    //     success: function (data) {
+    //          console.log(data);
+    //      // $("#user_name")[0].innerHTML = data.user_name;
+    //      // $("#user_teleNum")[0].innerHTML = data.user_teleNum;
+    //      // $("#user_ID")[0].innerHTML = data.user_ID;
+    //     }
+    //
+    // });
+    // $.ajax({
+    //     async : true,
+    //     url : "https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su",
+    //     type : "GET",
+    //     dataType : "json", // 返回的数据类型，设置为JSONP方式
+    //     jsonp : 'callback', //指定一个查询参数名称来覆盖默认的 jsonp 回调参数名 callback
+    //     jsonpCallback: 'handleResponse', //设置回调函数名
+    //     data : {
+    //
+    //         count : 1
+    //     },
+    //     success: function(response, status, xhr){
+    //         console.log('状态为：' + status + ',状态是：' + xhr.statusText);
+    //         console.log(response);
+    //     }
+    // });
+    // var script = document.createElement("script");
+    // script.src = "https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su";
+    // document.body.insertBefore(script, document.body.firstChild);
+    var  d="";
+    $.ajax({
+        async : true,
+        url : "http://api.douban.com/v2/movie/us_box",
+        type : "GET",
+        dataType : "jsonp", // 返回的数据类型，设置为JSONP方式
+        jsonp : 'callback', //指定一个查询参数名称来覆盖默认的 jsonp 回调参数名 callback
+        jsonpCallback: 'handleResponse', //设置回调函数名
+        data : {
+            q : "javascript",
+            count : 1
+        },
+        success: function(response, status, xhr){
+            console.log('状态为：' + status + ',状态是：' + xhr.statusText);
+            console.log(response);
+        }
+    });
+    // $.getJSON("https://api.douban.com/v2/book/search?q=javascript&count=1&callback=?", function(data){
+    //     console.log(data);
+    // })
+
+</script>
+</body>
+</html>

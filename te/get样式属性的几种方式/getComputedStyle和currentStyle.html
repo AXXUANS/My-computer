@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>getComputedStyle和currentStyle</title>
+    <style>
+        .button {
+            height: 2em;
+            border: 0;
+            border-radius: .2em;
+            background-color: #34538b;
+            color: #fff;
+            font-size: 12px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<input type="button" id="button" class="button" value="点击我，显示高度" />
+<script>
+    /*
+    * getComputedStyle是一个可以获取当前元素所有最终使用的CSS属性值。
+    * 返回的是一个CSS样式声明对象([object CSSStyleDeclaration])，只读。*/
+    /*currentStyle是IE浏览器自娱自乐的一个属性，其与element.style可以说是近亲，至少在使用形式上类似，element.currentStyle，
+    差别在于element.currentStyle返回的是元素当前应用的最终CSS属性值
+    （包括外链CSS文件，页面中嵌入的<style>属性等）。*/
+    document.getElementById("button").onclick = function() {
+        var oStyle = this.currentStyle? this.currentStyle : window.getComputedStyle(this, null);
+        alert(oStyle.height);
+    };
+</script>
+</body>
+</html>

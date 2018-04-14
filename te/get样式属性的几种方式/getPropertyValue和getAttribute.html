@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>getPropertyValue和getAttribute</title>
+    <style>
+        .button {
+            height: 2em;
+            border: 0;
+            border-radius: .2em;
+            background-color: #34538b;
+            color: #fff;
+            font-size: 12px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<input type="button" id="button" class="button" value="点击我，显示背景色" />
+<script>
+    /*getPropertyValue方法可以获取CSS样式申明对象上的属性值（直接属性名称）*/
+    /*etAttribute方法提供了与getPropertyValue方法类似的功能，可以访问CSS样式对象的属性。用法与getPropertyValue类似：*/
+    var oButton = document.getElementById("button");
+    if (oButton) {
+        oButton.onclick = function() {
+            var oStyle = this.currentStyle? this.currentStyle : window.getComputedStyle(this, null);
+            if (oStyle.getPropertyValue) {
+                alert("getPropertyValue下背景色：" + oStyle.getPropertyValue("background-color"));
+            } else {
+                alert("getAttribute下背景色：" + oStyle.getAttribute("backgroundColor"));
+            }
+        };
+    }
+</script>
+</body>
+</html>

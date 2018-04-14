@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>react.js</title>
+		 <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+		<script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+		<script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+	</head>
+	<body>
+		<div id="box">
+		div
+		</div>
+		<script type="text/babel">
+			var Hello = React.createClass({
+			    render:function(){
+			        var a="世界你好";
+			        var list=["re","rere","dra","tre"];
+			        var nodes=[];
+			        for(var i=0;i<list.length;i++){
+			            nodes.push(
+                            <li>{list[i]}</li>
+                        )
+                    }
+				    return(
+				     	<div>
+                            hello {a}
+                            <ul>{nodes}</ul>
+                        </div>
+				    )
+			    }
+			});
+			ReactDOM.render(
+				<Hello/>,/*虚拟dom*/
+				document.getElementById("box")
+            )
+		</script>
+	</body>
+</html>

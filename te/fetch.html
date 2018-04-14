@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用更优雅的异步请求API——fetch</title>
+</head>
+<body>
+<div id="r">
+
+</div>
+<script>
+    var r=document.getElementById("r");
+    fetch("2.txt", {
+        method: "get"
+    }).then(function(response) {
+        console.log(response);
+        // var a = JSON.parse(response.json());
+        // var a = response.json();
+        // console.log(a);
+        return response.json();
+    }).then(function(data) {
+        console.log(data);
+        // var a=JSON.stringify(data);
+        // console.log(typeof a);
+        // r.innerHTML=data.xu;
+        // this.setState({selV:data.obj})
+        for(i = 0; i < data.length; i++) {
+            var name = data[i].xu;
+            var price = data[i].xuan;
+            // do something more...console.log(typeof a);
+            console.log(name+":"+price);
+            str+=name+":"+price+"<br>";
+        }
+        r.innerHTML=str;
+    })
+    var str="";
+    fetch("2.txt").then(function(response) {
+        return response.json().then(function(json) {
+            for(i = 0; i < json.length; i++) {
+                var name = json[i].xu;
+                var price = json[i].xuan;
+                // do something more...console.log(typeof a);
+                console.log(name+":"+price);
+                str +=name+":"+price+"<br>";
+            }
+            r.innerHTML=str;
+        });
+    });
+    fetch('some-url')
+        .then(response => {
+        if (response.ok) {
+        return response.json()
+    } else {
+        return Promise.reject({
+            status: response.status,
+            statusText: response.statusText
+        })
+    }
+    })
+    .catch(error => {
+        if (error.status === 404) {
+        // do something about 404
+    }
+    })
+</script>
+
+</body>
+</html>

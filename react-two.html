@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>react.js 2</title>
+		 <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+		<script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+		<script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+	</head>
+	<body>
+		<div id="box">
+		div
+		</div>
+		<script type="text/babel">
+            var style={
+                color:"red"
+            }
+			var Hello = React.createClass({
+
+				getInitialState:function () {
+					return{
+                        list:["re","rere","dra","tre"],
+						value:"111"
+					}
+                },
+
+			    render:function(){
+			        var a="世界你好";
+			        var nodes=[];
+			        var that=this;
+			       nodes=this.state.list.map(function (n,i) {
+			           /*map方法返回一个由原数组中的每个元素调用一个指定方法后的返回值组成的新数组。*/
+			           /*i为索引*/
+					   return(
+						   <li>{n}
+						   <button onClick={that.handleDelete(i)}>delete</button>
+							   /*that.handleDelete(i)这里是函数的执行   就是调用*/
+						   </li>
+					   )
+                   })
+				    return(
+				     	<div >
+                            hello {a}
+                            <input value={this.state.value} onChange={this.Change}/>
+							<button onClick={this.handleclick}>添加</button>
+                            <ul>{nodes}</ul>
+                        </div>
+				    )
+			    },
+                Change:function (e) {
+					this.setState({
+						value:e.target.value
+					})
+                },
+                handleDelete:function (i) {/*alert("dada")*/
+					var that=this;
+                  return function () {
+                      var list=that.state.list;
+                      list.splice(i,1)
+                      that.setState({
+                          list:list
+                      })
+                  }
+                },
+				handleclick:function () {
+					// alert("点击触发");
+					var list=this.state.list;
+					list.push(this.state.value);
+					this.setState({
+						list:list
+					})
+				}
+			});
+			// jq渲染方法
+			// var str="";
+			// for(var i=0;i<list.length;i++){
+			//     str +="<p>"+"</p>"
+			// }
+            // document.getElementById("box").innerHTML=str;
+			ReactDOM.render(
+				<Hello/>,/*虚拟dom*/
+				document.getElementById("box")
+            )
+		</script>
+	</body>
+</html>
