@@ -1,0 +1,23 @@
+[
+  {"text":"IT技术","ico":"ico-it","childs":[
+  {"text":"Java","url":"http://www.baidu.com"},
+  {"text":"Android","url":"#"},
+  {"text":"Javascript","url":"#"},
+  {"text":"Php","url":"#"},
+  {"text":"...","url":"#","childs":[
+    {"text":"C","url":"#"},
+    {"text":"C++","url":"#"},
+    {"text":"C#","url":"#"},
+    {"text":"VB","url":"#"}
+  ]}
+]},
+  {"text":"电影","ico":"ico-it","childs":[
+    {"text":"国产","url":"#"},
+    {"text":"欧美","url":"#"},
+    {"text":"印度","url":"#"},
+    {"text":"日韩","url":"#"},
+    {"text":"","url":"#"}
+  ]},
+  {"text":"表情","url":"#","ico":"ico-it"},
+  {"text":"乐器","url":"#","ico":"ico-it"}
+]

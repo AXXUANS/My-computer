@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>递归菜单插件</title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <style>
+    </style>
+    <link rel="stylesheet" href="cs/csss.css">
+</head>
+<body>
+    <div class="navigate-wrapper" id="my-navigate">
+
+    </div>
+</body>
+<script src="js.js"></script>
+<script>
+   var ops ={
+     /*  spec:"",/!*spec(default):slide|fade*!/
+       effect:1000,/!*效果延迟*!/
+       asy:false,
+       /!*如果为true代表是异步请求数据 需要配置url 如果是false 那么直接根据data里面的数据读取*!/
+       url:"",*/
+       logoClass:"logo",
+       data:[
+           {"text":"IT技术","ico":"ico-it","childs":[
+                   {"text":"Java","url":"http://www.baidu.com"},
+                   {"text":"Android","url":"#"},
+                   {"text":"Javascript","url":"#"},
+                   {"text":"Php","url":"#"},
+                   {"text":"...","url":"#","childs":[
+                           {"text":"C","url":"#"},
+                           {"text":"C++","url":"#"},
+                           {"text":"C#","url":"#"},
+                           {"text":"VB","url":"#"}
+                       ]}
+               ]},
+           {"text":"电影","ico":"ico-it","childs":[
+                   {"text":"国产","url":"#"},
+                   {"text":"欧美","url":"#"},
+                   {"text":"印度","url":"#"},
+                   {"text":"日韩","url":"#"},
+                   {"text":"","url":"#"}
+               ]},
+           {"text":"表情","url":"#","ico":"ico-it"},
+           {"text":"乐器","url":"#","ico":"ico-it"}
+       ],
+       onHandler:function ($target,url) {}
+   };
+    $(function () {
+        $("#my-navigate").dnNavigate(ops)
+    })
+</script>
+</html>

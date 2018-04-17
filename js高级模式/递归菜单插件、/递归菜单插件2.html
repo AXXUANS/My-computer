@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>递归菜单插件</title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <style>
+    </style>
+    <link rel="stylesheet" href="cs/csss.css">
+</head>
+<body>
+    <div class="navigate-wrapper" id="my-navigate">
+    </div>
+</body>
+<script src="two.js"></script>
+<script>
+   var ops ={
+     /*  spec:"",/!*spec(default):slide|fade*!/
+       effect:1000,/!*效果延迟*!/
+       asy:false,
+       /!*如果为true代表是异步请求数据 需要配置url 如果是false 那么直接根据data里面的数据读取*!/
+       url:"",*/
+       logoClass:"logo",
+        asy:true,
+       url:"data",
+       onHandler:function ($target,url) {
+           // alert(url);
+           window.location.href=url;
+       }
+
+   };
+    $(function () {
+        $("#my-navigate").dnNavigate(ops)
+    })
+</script>
+</html>
