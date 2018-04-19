@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>冒泡排序</title>
+
+    <style>
+        body{
+            background: #333;
+        }
+        #field{
+            width: 550px;
+            height: 520px;
+            background: #333;
+            position: relative;
+        }
+        .bar{
+            position: absolute;
+            bottom: 0px;
+            background-color: red;
+            border: 1px silver solid;
+            width: 45px;
+            /*height: 300px;*/
+        }
+    </style>
+</head>
+<body>
+    <div id="field">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+
+    <script>
+        (function (d) {
+            var bars=[].slice.call(d.querySelectorAll('.bar'));
+            var arr=[2,3,5,5.1,6,7.6,7,6.4,2,3,8];
+            var state=[];
+            function draw() {
+                var bar,s;
+                s=state.shift()||[];
+                for (bar in bars){
+                    bars[bar].style.height=50*s[bar]+"px";
+                    bars[bar].style.left=50*bar+"px";
+                }
+            }
+
+            function sort(arr) {
+                for(var i=arr.length-1 ; i > 0 ;i--){
+
+                    for (var k=0;k < i;k++){
+                        // var temp= arr[k];
+                        // arr[k]=arr[k+1]+arr[k];
+                        // arr[k+1]=arr[k]-arr[k+1];
+                        // arr[k]=arr[k]-arr[k+1];
+                        if(arr[k]<arr[k+1]){
+                            arr[k]=arr[k+1]+arr[k];
+                            arr[k+1]=arr[k]-arr[k+1];
+                            arr[k]=arr[k]-arr[k+1];
+                            state.push(JSON.parse(JSON.stringify(arr)))
+                        }
+                    }
+                }
+                return arr;
+            }
+            sort(arr);
+            setInterval(draw,100);
+        })(document)
+    </script>
+</body>
+<!--<script src="bubble.js"></script>-->
+</html>

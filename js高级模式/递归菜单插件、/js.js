@@ -48,7 +48,7 @@
         handleEvent:function () {
             // console.log(this._$ele)
             $("a",this._$ele).off("click").on("click",function () {
-                // alert(111)
+                 // alert(111)
                 //首先判断这个a标签下面有没有子菜单
                 var $child =$(this).next();
                 console.log($child)

@@ -21,7 +21,7 @@
        /!*如果为true代表是异步请求数据 需要配置url 如果是false 那么直接根据data里面的数据读取*!/
        url:"",*/
        logoClass:"logo",
-        asy:true,
+        asy:false,
        url:"data",
        onHandler:function ($target,url) {
            // alert(url);
@@ -31,6 +31,8 @@
    };
     $(function () {
         $("#my-navigate").dnNavigate(ops)
+
     })
+
 </script>
 </html>
