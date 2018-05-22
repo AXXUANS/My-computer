@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>number方法</title>
+</head>
+<body>
+<script>
+    var n=Number('112.212');//这是一个函数   nueber
+    console.log(n);//112.212
+    console.log(typeof n);//number
+    var n=new Number('112.212');//这是一个对象
+    console.log(n);
+    console.log(typeof n);//object
+
+    console.log(Number.MAX_VALUE);//最大值 1.7976931348623157e+308
+    console.log(Number.MIN_VALUE);//最小值  5e-324
+    console.log(Number.NaN);
+    console.log(Number.NEGATIVE_INFINITY);//负的无穷大 -Infinity
+    console.log(Number.POSITIVE_INFINITY);//正的无穷大 Infinity
+
+
+    console.log(Number.isNaN(Number.NaN));//true
+    console.log(Number.isNaN(0/0));//true
+    console.log(Number.isNaN(NaN));//true
+    console.log(Number.isNaN(""));//false
+    console.log(Number.isNaN(true));//false
+
+
+    // 四舍五入
+    var n=1231.4343;
+    console.log(n.toFixed());//1231
+    console.log(n.toFixed(1));//1231.4
+    console.log(n.toFixed(3));//1231.434
+    console.log(n.toFixed(6));//1231.434300
+    console.log(1.23e+20.toFixed(3));//123000000000000000000.000
+    console.log(1.23e-20.toFixed(2));//0.00
+    console.log(2.546.toFixed(2));//2.55
+
+    //以指数的形式返回 e+2= *100
+    var n=431.4343;
+    console.log(n.toExponential());//4.314343e+2
+    console.log(n.toExponential(2));//4.31e+2
+    console.log(n.toExponential(4));//4.3143e+2
+    console.log(n.toPrecision(2));//4.3e+2
+    console.log(n.toPrecision());//431.4343
+    console.log((1264.567).toPrecision(2));//1.2e+3
+    console.log(n.toPrecision(2));//4.3e+2
+
+    //转化成2/10/16进制
+    var n=new Number(233);
+    console.log(n.toString());//233
+    console.log(n.toString(10));//233
+    console.log(n.toString(16));//e9
+    console.log(n.toString(2));//11101001
+
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>方法</title>
+</head>
+<body>
+<script>
+   //测试Boolean对象
+     var b=new Boolean();
+   console.log(typeof b);//object
+   console.log(b.valueOf());//false
+   console.log(typeof b.valueOf());//boolean
+   var b=new Boolean(0);
+   var b=new Boolean(-0);
+   var b=new Boolean(null);
+   var b=new Boolean(false);
+   var b=new Boolean("");
+   console.log( b+"@@@@");//false@@@@
+   var b=new Boolean("false");
+   console.log( b);//Boolean {true}
+
+   // console.log(typeof b);
+
+</script>
+</body>
+</html>

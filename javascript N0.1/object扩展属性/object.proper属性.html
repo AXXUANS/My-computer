@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Object.prototype方法</title>
+</head>
+<body>
+<script>
+    //getOwnPropertyDescriptor获取一个对象的所有自身属性的描述符。
+    var obj = {
+        get foo() {
+        }
+    }
+    console.log(Object.getOwnPropertyDescriptor(obj, 'foo'));
+//{get: ƒ, set: undefined, enumerable: true, configurable: true}
+    var obj1 = {
+        name: "king",
+        age: 12
+    }
+    console.log(Object.getOwnPropertyDescriptor(obj1, 'name'));
+    //{value: "king", writable: true, enumerable: true, configurable: true}
+    obj = {};
+    Object.defineProperty(obj, 'test', {
+        value: "thsi is a test",
+        writable: false,
+        configurable: false,
+        enumerable: true
+    })
+    console.log(Object.getOwnPropertyDescriptor(obj, 'test'));
+    // {value: "thsi is a test", writable: false, enumerable: true, configurable: false}
+    var obj1 = {x: "1"};
+    var obj2 = Object.create(obj1);
+    console.log(Object.getOwnPropertyDescriptor(obj2, 'x'));//undefined 因为x是obj2原型obj1中的属性
+    // console.log(Object.getPrototypeOf(obj2));//查看obj2的原型是否是obj1；
+    console.log(Object.getPrototypeOf(obj2) == obj1);//true
+    // Object.prototypede  Object.constructor 代表对象的本身
+    var obj3 = new Object;
+    console.log(obj3.constructor == Object);//true
+    var arr1 = new Array;
+    console.log(arr1.constructor == Array);//true
+    var n = new Number(21);
+    console.log(n.constructor == Number);//true
+
+    function Test() {
+    }
+
+    var f = new Test();
+    console.log(f.constructor);//ƒ Test() {} constructor为原素本身
+    console.log(f.toString());//[object object]
+    Test.prototype.toString = function () {
+        return "this a Custom Method"
+    };
+    console.log(f.toString());//this a Custom Method
+    //toString()返回一个表示该对象的字符串。
+    var toString=Object.prototype.toString;
+    console.log(toString.call(new Date));//[object Date]
+    console.log(toString.call(Math));//[object  Math]
+    console.log(toString.call(new String));//[object  String]
+    console.log(toString.call(null));//[object  null]
+    console.log(toString.call(undefined));//{[object undefined]
+    var obj={x:1};
+    console.log(obj.valueOf());//{x: 1} 方法返回指定对象的原始值。
+</script>
+</body>
+</html>

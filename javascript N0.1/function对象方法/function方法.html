@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>function方法</title>
+</head>
+<body>
+<script>
+    function Test1(x, y, z) {
+        return x + y + z
+    }
+
+    console.log(Test1.length)
+
+    function A() {
+        return A.caller;
+    }
+
+    function B() {
+        return A();
+    }
+
+    console.log(B());
+    console.log(A());
+
+    function Test3(x, y, z) {
+        return arguments
+    }
+
+    console.log(Test3(32, 46, 76, 3, 25, 76, 1, 65647, 7));
+
+    //callee属性 这个属性引用的是当前被调用的函数对象
+    function f() {
+        return arguments.callee;
+    }
+
+    console.log(f());
+    //一个匿名函数的递归调用
+    // (function (count) {
+    //     if(count<=3){
+    //         alert(count)
+    //         arguments.callee(++count)
+    //     }
+    // })(0)
+    function f1(a,b,c) {
+        return a+b+c;
+    }
+    console.log(f1.toString());
+    console.log(f1.valueOf());
+
+
+    var obj={
+        name:"king",
+        say:function (somebody) {
+            return "Hello "+somebody+" This is "+this.name;
+        }
+    }
+    console.log(obj.say("queen"));
+    var obj2={
+        name:"Jasin",
+    }
+    console.log(obj.say.call(obj2,"zhi"));
+    var obj3={
+        calc:function (x,y,z) {
+            return x+y+z;
+        }
+    }
+    console.log(obj3.calc.call(null,1,456,2));
+    console.log(obj3.calc.apply(null,[21,32,2]));
+</script>
+</body>
+</html>

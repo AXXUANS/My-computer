@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.3.4/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <mycom :v="nnum" :ar="arr">
+        <div slot="slot2">hahahhah</div>
+        <div slot="slot1">ggggggggggggg</div>
+    </mycom>
+    <img src="https://images2015.cnblogs.com/blog/1118105/201704/1118105-20170423002914227-1452414728.png" alt="">
+</div>
+<script>
+    // Vue.component('mycom', {
+    //     render: function (createElement) {
+    //         var s = this;
+    //         if (this.v == 1) {
+    //             return createElement('div',
+    //                 {
+    //                     domProps: {innerHTML: 'component n=' + this.n}
+    //                 })
+    //         } else {
+    //             return createElement('div',
+    //                 [this.$slots.slot1,this.$slots.slot2])
+    //         }
+    //     },
+    //     props: {
+    //         v: {
+    //             type: Number,
+    //             default: 1
+    //         },
+    //         n: {
+    //             default: 'hello'
+    //         }
+    //     }
+    // });
+    // var app = new Vue({
+    //     el: '#app',
+    //     data: {
+    //         nnum: 2
+    //     }
+    // })
+    // Vue.component('mycom',{
+    //     render:function(createElement){
+    //         if(this.v==1){
+    //             return createElement('div',
+    //                 this.ar.map(function(item){
+    //                     return createElement('li',
+    //                         {
+    //                             domProps:{
+    //                                 innerHTML:item
+    //                             }
+    //                         })
+    //                 })
+    //             )
+    //         }else{
+    //
+    //             return createElement('div',
+    //                 [this.$slots.slot1,this.$slots.slot2])
+    //         }
+    //     },
+    //     props:{
+    //         v:{
+    //             type:Number,
+    //             default:0
+    //         },
+    //         n:{
+    //             default:'hello'
+    //         },
+    //         ar:{
+    //             type:Array,
+    //             default:function(){ return [1,23,4,5,6,55,65]}
+    //         }
+    //
+    //     }
+    // });
+    Vue.component('mycom',{
+        render:function (createElement) {
+            var arr = [undefined,undefined,undefined,undefined,undefined];
+            return createElement('div',
+                arr.map(function () {
+                    return createElement('p', 'hi')
+                })
+            )
+        }
+
+    });
+    var app=new Vue({
+        el:'#app',
+        data:{
+            nnum:1,
+            arr:[1,2,3,4,5,6,7,8]
+        }
+    })
+    var arr1=new Array(5)
+    var arr2=Array.apply(null, { length: 20 });
+    //貌似  arr2  这个数组里面的值被初始化了，并且每一项被赋的值都是  undefined  ，而  arr1  这个数组里面的每一项都只是创建了而已，并没有赋值。
+//自己理解 arr1只是添加了一个长度为5的属性 arr2则是给了20个空的位置  并且长度赋值为20
+</script>
+</body>
+</html>

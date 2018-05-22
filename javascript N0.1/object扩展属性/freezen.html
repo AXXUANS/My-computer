@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>freezen</title>
+</head>
+<body>
+<script>
+    var obj={
+        prop:function () {},
+        foo:'king'
+    };
+    obj.test='this is a test';
+    delete  obj.prop;
+    var o=Object.freeze(obj);
+    console.log(obj===o);//true
+    console.log(Object.isFrozen(o));//true  返回true  为冻结
+    o.x=1;
+    console.log(o.x);//冻结   无法修改
+    console.log(o.foo);//king
+    o.foo="queen";
+    console.log(o.foo);//king  冻结   无法修改
+    //浅层冻结
+    var obj1={
+        internal:{}
+    };
+    Object.freeze(obj1);
+    obj1.internal.x=1;
+    console.log(obj1.internal.x);//1 只是冻结了第一层  第二层还是可修改
+
+    //完全版冻结
+    function deepFreeze(obj) {
+        var prop,propKey;
+        Object.freeze(obj);
+        for(propKey in  obj){
+            prop=obj[propKey];
+            if(!obj.hasOwnProperty(propKey)||!(typeof prop ==='object')||Object.isFrozen(prop)){
+              continue;
+            }
+            deepFreeze(prop);
+        }
+    }
+    var obj2={
+        internal:{}
+    }
+    deepFreeze(obj2);
+    obj2.internal.x=1;
+    console.log(obj2.internal.x);//undefined  递归函数 遍历每层全部冻结
+</script>
+</body>
+</html>

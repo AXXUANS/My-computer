@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>preventExtensions</title>
+</head>
+<body>
+<script>
+    var obj={};
+    //检测对象是否扩展
+    console.log(Object.isExtensible(obj));//true
+    var d=new Date();
+    console.log(Object.isExtensible(d));//true
+    obj.x=1;
+    //通过preventExtensions(obj)
+    obj1=Object.preventExtensions(obj);
+    console.log(obj==obj1);
+    obj1.y=2;
+    console.log(obj1.y);
+    Object.defineProperty(obj1,"z",{value:2});
+</script>
+</body>
+</html>

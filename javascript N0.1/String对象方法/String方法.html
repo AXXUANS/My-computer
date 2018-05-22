@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>String方法</title>
+</head>
+<body>
+<script>
+    // var str = "hello";
+    // console.log(typeof str);//string
+    // var strObj = new String("hello");
+    // console.log(typeof strObj);//object
+    // console.log(strObj[0]);//成为对象之后就有了索引和长度  h
+    // console.log(strObj.length);// 5
+    // console.log(strObj.toString());// hello
+    // console.log(strObj.valueOf());// hello
+    // //直接成对象
+    // console.log("web".length);// 3
+    // console.log("web"[1]);// e
+    // var str = String("hello");
+    // console.log(str + "@1");// hello@1
+    // str = String({C: 1});
+    // console.log(str + "@2");// [object Object]@2
+    // str = String(null);
+    // console.log(str + "@3");// null@3
+    // str = String(true);
+    // console.log(str + "@4");// true@4
+    // //charAt()根据下标返回指定字符
+    // str = "hello";
+    // console.log(str.charAt(0));// h
+    // console.log(str.charAt(1));// e
+    // console.log(str.charAt(2));// l
+    // console.log(str.charAt(3));// l
+    // console.log(str.charAt(40));//  下标位置没有值时  返回空
+    // str = "abcdef";
+    // //charCodeAt()返回指定字符的ASCII码值
+    // console.log(str.charCodeAt(0));// 97
+    // console.log(str.charCodeAt(100));// NaN
+    // console.log(str.charCodeAt(-123));// NaN
+    // //FromCharCode():根据指定的ASCII返回对应得字符
+    // console.log(String.fromCharCode(97));// a
+    // console.log(String.fromCharCode(65,66,67));// ABC
+    // //concat() 连接字符串
+    // var str="hello";
+    // console.log(str.concat("world"));// helloworld
+    // console.log(str.concat("world","!"));// helloworld!
+    // //字符串搜索相关
+    // var str="this is a test";
+    // console.log(str.indexOf("t"));// 0
+    // console.log(str.indexOf("is"));// 2
+    // console.log(str.indexOf("Is"));// -1 找不到返回-1
+    // console.log(str.indexOf("i"));// 2
+    // console.log(str.indexOf("i",3));// 从第3个位置开始查找  5
+    // //通过indexOf()可以查找字符在指定字符串中出现的次数
+    // var str="dsafduhtyjbxzi33222sSSSsssuropqsrj";
+    //  var pos=str.indexOf("s");
+    //  var count=0;
+    //  while (pos != -1){
+    //      count++;
+    //      pos=str.indexOf("s",pos+1)
+    //  }
+    //  console.log(count);
+    // // console.log(str.indexOf());//
+    // //lastIndexOf()最后一次出现的位置
+    // var str ='this is a test';//5
+    // console.log(str.lastIndexOf("is"));
+    // //比较两个字符串 按照特定规则排序   相同返回为0  区分大小写
+    // console.log("a".localeCompare("s"));//-1
+    // console.log("a".localeCompare("a"));//0
+    // console.log("a".localeCompare("A"));//-1
+    // //match(); 找到一个或多个正则表达式的结果
+    // var str="this is a test of show time";
+    // var rs=/is/i;
+    // console.log(str.match(rs));//["is", index: 2, input: "this is a test of show time", groups: undefined]
+    // var str="SAFGFVSDTTUJRYGERWEYLUIKGHfkjsdbfhsdufhasiuhaidsa";
+    // console.log(str.match(/[a-g]/ig));// ["A", "F", "G", "F", "D", "G", "E", "E", "G", "f", "d", "b", "f", "d", "f", "a", "a", "d", "a"]
+    // //search()根据正则表达式进行搜索
+    // var str ='this is a test';
+    // console.log(str.search(/is/));//2
+    // console.log(str.search(/IS/));//-1
+    //  console.log(str.search(/IS/i));//2
+    // //replace()替换
+    // var newStr=str.replace(/IS/ig,"!");
+    // console.log(newStr);//th! ! a test
+    var str="2018-4-23";
+    var newStr=str.replace(/(\d{4})-(\d{2})-(\d{2})/,"$2/$3/$1");
+    console.log(newStr);
+    var newStr=str.replace(/(\d{4})-(\d{2})-(\d{2})/,funx);
+    function funx(match,d1,d2,d3) {
+        alert(match)
+        console.log(d1)
+        console.log(d2)
+        return [d2,d3,d1].join('/');
+    }
+    console.log(newStr);
+    //slice 截取字符串
+    var str="abcdef";
+    console.log(str.slice(2));
+    console.log(str.slice(0,2));
+    console.log(str.slice(-3));
+    console.log(str.slice(-4,-2));
+    console.log(str.substr(3));
+    console.log(str.substr(0,4));
+    //split()将字符串拆分分成数组
+    var str='2015-04-23';
+    var arr=str.split("-");
+    console.log(arr);
+    var str='a f gfe c sv 3 x2 sz';
+    var arr=str.split(" ");
+    console.log(arr);
+    var arr=str.split(" ",3);
+    console.log(arr);
+    //字符串大小写转换
+    console.log("KKKKKIG".toLowerCase());
+    console.log("KKKKKIG".toLocaleLowerCase());
+    console.log("me".toUpperCase());
+    console.log("me".toLocaleUpperCase());
+    //trim()
+    var str=" abc ";
+    console.log("!"+str+'!');
+    console.log("!"+str.trim()+'!');
+    //产生锚点
+    var str=" this is a test of show time ";
+    document.body.innerHTML=str.anchor("miaodian")//添加锚点
+    //产生链接
+    var title="this is a test of show time";
+    var url="https://www.baidu.com/";
+    document.write(title.link(url));
+</script>
+</body>
+</html>

@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="js/bootstrap-table/bootstrap-table.min.css" />
+    <link rel="stylesheet" href="js/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css" />
+    <link rel="stylesheet" href="js/bootstrap-select/css/bootstrap-select.min.css" />
+    <link rel="stylesheet" href="js/zselect/zselect.css" />
+    <link rel="stylesheet" href="js/scroller/css/nicescroll.css" />
+    <link rel="stylesheet" href="js/zTree_v3/css/zTreeStyle/zTreeStyle.css" />
+    <link rel="stylesheet" href="js/puck-1.0.0/css/puck.css" />
+    <style type="text/css">
+
+        body{
+            background:#fbfbfb;
+            font-family: "Microsoft YaHei";
+        }
+        #top_container {
+            position: relative;
+            width: 100%;
+            height: 60px;
+            background-color: #6085FF;
+            z-index: 1004;
+        }
+
+        #top_container>.ui-header {
+            height: 60px;
+            position: relative;
+        }
+
+        .ui-header .icon {
+            margin: 10px;
+            width: 40px;
+            height: 40px;
+            float: left;
+            background-image: url("image/logo.png");
+            background-position: 50% 50%;
+            background-repeat: no-repeat;
+        }
+
+        .ui-header .log-info {
+            margin-top: 12px;
+            font-size: 18px !important;
+            line-height: 40px;
+            float: left;
+            color: #fff;
+        }
+
+        .operator-button {
+            display: inline-block;
+            width: 30px;
+        }
+
+        .level-3 {
+            margin-left: 100px;
+        }
+
+        .delete-icons{
+            color: red;
+            margin-top: 5px;
+            margin-left:20px;
+        }
+
+        .execute-icons{
+            color: green;
+            margin-top: 5px;
+            margin-left:20px;
+        }
+
+        .form-horizontal .form-group{
+            margin-right: 0;
+            margin-left: 0;
+        }
+
+        .align-left{
+            text-align: left !important;
+            font-weight: normal;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .btn-hik-primary{
+            color: #fff;
+            background-color: #2080f7;
+            border-color: #2080f7;
+            width:96px;
+            height: 32px;
+            display: inline-block;
+            line-height: 1;
+            white-space: nowrap;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-color: #e5e5e5;
+            -webkit-appearance: none;
+            text-align: center;
+            box-sizing: border-box;
+            outline: none;
+            font-weight: 700;
+            margin: 0;
+            transition: all .2s;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            text-align: center;
+            font-size: 12px;
+            border-radius: 2px;
+        }
+
+
+        .modal {
+            text-align: center;
+        }
+
+        .modal-dialog {
+            display: inline-block;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        #table0 thead {
+            background:#fafafa;
+        }
+
+        .fixed-table-pagination{
+            padding:0 30px;
+        }
+
+        .panel-body {
+            padding: 5px;
+        }
+
+        .panel{
+            border:0px;
+            margin-bottom: 20px;
+        }
+
+        #row-view .form-group {
+            margin-bottom: 0px;
+        }
+
+        #timeZone-view {
+            margin-top: 15px;
+        }
+
+        #row-edit .timeZone{
+            margin-bottom: 0em;
+        }
+
+        .panel-heading{
+            background:#DDDDDD !important;
+        }
+
+        .panel-body{
+            background: #F2F2F2;
+        }
+
+        .page-header{
+            border-bottom: 1px solid #e6dddd;
+        }
+
+        label{
+            font-weight: normal;
+        }
+
+        th{
+            font-weight: normal;
+        }
+
+        /*.drop-down-icon{*/
+        /*    transition: transform .3s,-ms-transform .3s;*/
+        /*    -webkit-transition: -webkit-transform .3s;*/
+        /*    transform:rotate(0);*/
+        /*    -ms-transform:rotate(0);*/
+        /*-webkit-transform:rotate(0);*/
+        /*}*/
+        .drop-down-icon.drop-is-reverse{
+            transform: rotate(0);
+            -webkit-transform: rotate(0);
+            /* transform:rotate(180deg);*/
+            /* -ms-transform:rotate(180deg);*/
+            /*   -webkit-transform:rotate(180deg);*/
+        }
+        .drop-down-icon{
+            transform: rotate(180deg);
+            -webkit-transform: rotate(180deg);
+            transition: transform .3s;
+        }
+
+
+        .modal {
+            text-align: center;
+        }
+
+        @media screen and (min-width: 768px) {
+            .modal:before {
+                display: inline-block;
+                vertical-align: middle;
+                content: " ";
+                height: 100%;
+            }
+        }
+
+        .modal-dialog {
+            display: inline-block;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+
+
+    </style>
+
+</head>
+
+<body style="background:#fbfbfb">
+
+<div id="top_container" style="height: 60px;">
+    <div class="ui-header">
+        <div class="icon"></div>
+        <div class="log-info">测试使用</div>
+    </div>
+</div>
+
+<div class="container" style="background:#FFFFFF;">
+    <div class="row">
+        <div id="main" class="col-md-12">
+            <div id="toolbar">
+                <div class="btn-group">
+
+                    <button class="btn-hik-primary" id="toolbar_add">
+                        <span>新增</span>
+                    </button>
+
+                </div>
+            </div>
+            <table id="table0" ></table>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade" id="row-view" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document" style="width:1200px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel-view">
+                    计划查看
+                    <!--<a href="#" style="float:right;" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>-->
+                    <a href="#" style="float:right;" data-dismiss="modal"><img src="image/close.png" style="height: 20px;width:20px;" aria-hidden="true"></a>
+                </h4>
+            </div>
+            <div class="modal-body" style="overflow-y: auto;height: 600px;">
+                <form class="form-horizontal" role="form" >
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">计划名称:</label>
+                        <label class="col-md-2 control-label align-left" name="name"></label>
+                        <label class="col-md-1 control-label">开始日期:</label>
+                        <label class="col-md-2 control-label align-left" name="begindate"></label>
+                        <label class="col-md-1 control-label">结束日期:</label>
+                        <label class="col-md-3 control-label align-left" name="enddate"></label>
+                    </div>
+
+                    <div id="timeZone-view">
+
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="row-edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document" style="width:1200px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel-edit">
+                    计划新增/修改
+                    <a href="#" style="float:right;" data-dismiss="modal"><img src="image/close.png" style="height: 20px;width:20px;" aria-hidden="true"></a>
+                </h4>
+            </div>
+            <div class="modal-body" style="overflow-y: auto;height: 600px;">
+                <form class="form-horizontal" role="form">
+
+                    <div class="form-group plan">
+
+                        <input class="form-control" id="planID" type="text" style="display: none" >
+
+                        <label class="col-md-2 control-label">计划名称:</label>
+                        <div class="col-md-2">
+                            <input class="form-control" id="name" type="text" required="required">
+                        </div>
+                        <label class="col-md-1 control-label">开始日期:</label>
+                        <div class="col-md-2">
+                            <input class="form-control datePicker" id="begindate" type="text" required="required">
+                        </div>
+                        <label class="col-md-1 control-label">结束日期:</label>
+                        <div class="col-md-2">
+                            <input class="form-control datePicker" id="enddate" type="text" required="required">
+                        </div>
+                        <div class="col-md-2">
+                            <!--<button id="timeAdd" class="btn-hik-primary time-add" ><span>新增时间段</span></button>-->
+                            <button id="timeAdd" type="button" class="btn-hik-primary time-add level-2">新增时间段</button>
+                        </div>
+                    </div>
+
+                    <div id="timeZone-edit"></div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btn_submit" class="btn-hik-primary" style="margin-right: 100px;" data-dismiss="modal">保存</button>
+                <!--html.push('<button type="button" class="btn-hik-primary  sf-add level-3">新增算法</button>');-->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.rotate.js"></script>
+<script type="text/javascript" src="js/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-table/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker/js/moment.js"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker/js/zh-cn.js"></script>
+<script type="text/javascript" src="js/bootstrap-select/js/bootstrap-select.js"></script>
+<script type="text/javascript" src="js/bootstrap-select/js/i18n/defaults-zh_CN.min.js"></script>
+<script type="text/javascript" src="js/zselect/zselect.js" ></script>
+<script type="text/javascript" src="js/scroller/jquery.nicescroll.js" ></script>
+<script type="text/javascript" src="js/zTree_v3/js/jquery.ztree.all-3.5.js" ></script>
+
+
+<script type="text/javascript">
+    var sfs = [];
+    var kkTree = {};
+
+
+    $('#table0').bootstrapTable({
+        columns: [{
+            field: "name",
+            title: '计划名称',
+            valign: "middle",
+            align: "center"
+        },
+            {
+                field: "begindate",
+                title: '开始日期',
+                valign: "middle",
+                align: "center",
+            },
+            {
+                field: "enddate",
+                title: '结束日期',
+                valign: "middle",
+                align: "center"
+            },
+            {
+                field: "operate",
+                title: "操作",
+                align: "center",
+                valign: "middle",
+                formatter: operateFormatter,
+                edit: false
+            },
+        ],
+        classes:"table table-no-bordered",
+        url: 'szAlgSched',
+        rowStyle: function (row, index) {
+            if(index % 2 == 0){
+                return {css:{'background':'#ffffff'}}
+            }else{
+                return {css:{'background':'#fafafa'}}
+            }
+        },
+//        url:"js/data1.json",
+        method:'get',
+        idField: "id",
+        pagination: true,
+        sidePagination: 'client',
+        //             searchOnEnterKey: true,
+        pageList: [5,10,50],
+        toolbar: "#toolbar",
+    });
+
+    $(".datePicker").datetimepicker({
+        locale: moment.locale('zh-cn'),
+        format: 'YYYY-MM-DD'
+    });
+
+    $.ajax({
+        url: "szAlg",
+        method:'get',
+        success: function(data) {
+            sfs = JSON.parse(data);
+//            sfs = [{"vendorid":1,"vendorname":"hik","sf":[{"algorithmid":7,"name":"车辆分析"},{"algorithmid":10,"name":"人体车辆分析"},{"algorithmid":13,"name":"卡口车辆"},{"algorithmid":14,"name":"车辆分析"},{"algorithmid":3,"name":"人体车辆分析"},{"algorithmid":6,"name":"卡口车辆"}]}];
+        }
+    });
+
+
+    function operateFormatter(value, row, index) {
+        return [
+            "<a class=\"operator-button\" href='javascript:viewRow(" + index + ")' title=\"修改\">",
+//            "<i class='glyphicon glyphicon-search'></i>",
+            "<img src='image/search.png'>",
+            "</a>     ",
+            "<a class=\"operator-button\" href='javascript:editRow(" + index + ")' title=\"修改\">",
+            "<img src='image/edit.png'>",
+            "</a>     ",
+            "<a class=\"operator-button\" href='javascript:removeRow(" + index + ")' title=\"删除\">",
+            "<img src='image/trashcan.png'>",
+            "</a>     ",
+        ].join('');
+    };
+
+    function viewRow(index) {
+
+        var planid = $("#table0").bootstrapTable('getData')[index].id;
+
+        $.ajax({
+            url: "szAlgSched/"+planid,
+//            url: "js/data2.json",
+            success: function(data) {
+
+                data = JSON.parse(data);
+
+                $("#timeZone-view").html('');
+
+                $("#row-view label[name='name']").text(data.name);
+                $("#row-view label[name='begindate']").text(data.begindate);
+                $("#row-view label[name='enddate']").text(data.enddate);
+                var html = [];
+
+                $.each(data.timeZone, function(index,item) {
+
+                    html.push('<div class="panel panel-default"> ');
+                    html.push('    <div class="panel-heading">');
+                    html.push('        <h3 class="panel-title">时间段('+item.begintime+"-"+item.endtime+")");
+                    html.push('            <a href="javascript:void(0)"  title="立刻执行"><span class="glyphicon glyphicon-play execute-icons" name="executeImmediate" ><input name="timeZoneID" value="'+item.id+'" style="display:none" /></span></a>');
+//                    html.push('            <a href="#" style="float:right;text-decoration:none" name="toggleBody">>></a>');
+                    html.push('            <a href="#" style="float:right;text-decoration:none;" name="toggleBody"><span class="glyphicon glyphicon-chevron-up drop-down-icon" style="display: inline-block"></span></a>');
+                    html.push('        </h3>');
+                    html.push('    </div>');
+                    html.push('    <div class="panel-body timeZoneDiv" >');
+                    html.push('        <div class="form-group">');
+                    html.push('             <label class="col-md-2 control-label">开始时间:</label>');
+                    html.push('             <label class="col-md-2 control-label align-left" >' + item.begintime + '</label>');
+                    html.push('             <label class="col-md-1 control-label">结束时间:</label>');
+                    html.push('             <label class="col-md-2   control-label align-left" >' + item.endtime + '</label>');
+                    html.push('             <label class="col-md-1 control-label">卡口:</label>');
+                    html.push('             <label title="'+item.crossingname+'" class="col-md-3 control-label align-left" >' + item.crossingname + '</label>');
+
+
+                    html.push('             <h5 class="page-header level-2"></h5>');
+
+                    $.each(item.sf, function(value, item, index) {
+                        html.push('         <div class="form-group sf">');
+                        html.push('             <label class="col-md-2 control-label">厂商:</label>');
+                        html.push('             <label class="col-md-2 control-label align-left" >' + item.vendorname + '</label>');
+                        html.push('             <label class="col-md-1 control-label">算法:</label>');
+                        html.push('             <label class="col-md-2 control-label align-left" >' + item.name + '</label>');
+                        html.push('             <label class="col-md-1 control-label">违法业务:</label>');
+                        var alarmName = "";
+                        var alarms = item.alarm.split(",");
+
+                        $.each(alarms, function(value, item, index) {
+                            temp = (value == 1) ? "大货车闯禁行" : "危险品车闯禁行";
+                            alarmName = alarmName + "," + temp;
+                        });
+                        alarmName = alarmName.substring(1);
+                        html.push('             <label class="col-md-3 control-label align-left" >' + alarmName + '</label>');
+                        html.push('         </div>');
+                    });
+                    html.push('     </div>');
+                    html.push('  </div>');
+                    html.push('</div>');
+                });
+
+                $("#timeZone-view").append(html.join(''));
+
+                $("#row-view input").attr("readonly", "readonly");
+
+                toggleBodyListener();
+
+                executeImmediateListener();
+
+            }
+        });
+
+        $("#row-view").modal({backdrop: 'static', keyboard: false}).on("shown.bs.modal",function () {
+        });
+    };
+
+    function editRow(index) {
+
+
+        var planid = $("#table0").bootstrapTable('getData')[index].id;
+
+
+        $.ajax({
+            url: "szAlgSched/"+planid,
+//            url:"js/data2.json",
+            success: function(data) {
+                data = JSON.parse(data);
+                $("#timeZone-edit").html('');
+                $("#planID").val(planid);
+                $("#name").val(data.name);
+                $("#begindate").val(data.begindate);
+                $("#enddate").val(data.enddate);
+                var html = [];
+
+                $.each(data.timeZone, function(index, item) {
+
+                    html.push('<div class="panel panel-default"> ');
+                    html.push('    <div class="panel-heading">');
+                    html.push('        <h3 class="panel-title">时间段');
+//                    html.push('            <a href="javascript:void(0)"  title="删除时间段"><span class="glyphicon glyphicon-remove-circle delete-icons delete-timezone" name="executeImmediate" ></span></a>');
+                    html.push('            <a href="javascript:void(0)" title="删除时间段" style="margin-left:934px;"><img src="image/trashcan.png" class="delete-timezone"></img> </a>');
+//                    html.push('            <a href="#" style="float:right;text-decoration:none" name="toggleBody">>></a>');
+                    html.push('            <a href="#" style="float:right;text-decoration:none" name="toggleBody"><span class="glyphicon glyphicon-chevron-up drop-down-icon"></span><span class="glyphicon  glyphicon-chevron-down" style="display: none"></span></a>');
+                    html.push('        </h3>');
+                    html.push('    </div>');
+                    html.push('    <div class="panel-body timeZoneDiv" >');
+                    html.push('         <div class="form-group timeZone">');
+                    html.push('             <label class="col-md-2 control-label">开始时间:</label>');
+                    html.push('             <div class="col-md-2">');
+                    html.push('                 <input class="form-control datetimePicker"  name="begintime" type="text" value=' + item.begintime + '>');
+                    html.push('             </div>');
+                    html.push('             <label class="col-md-1 control-label">结束时间:</label>');
+                    html.push('             <div class="col-md-2">');
+                    html.push('                 <input class="form-control datetimePicker" name="endtime" type="text" value=' + item.endtime + '>');
+                    html.push('             </div>');
+                    html.push('             <label class="col-md-1 control-label">卡口:</label>');
+                    html.push('             <div class="col-md-2">');
+//                    html.push('                <input class="form-control"  name="crossingid1" type="text" value=' + item.crossingid + ' style="display:none" />' );
+//                    html.push('                 <input class="form-control" id="crossing'+index+'" name="crossingid" type="text" value="' + item.crossingid + '" >');
+                    html.push('                 <input class="form-control" id="crossing'+index+'" name="crossingid" type="text" >');
+                    html.push('             </div>');
+                    html.push('             <div class="col-md-2">');
+                    html.push('                 <button type="button" class="btn-hik-primary  sf-add level-3">新增算法</button>');
+                    html.push('             </div>');
+
+                    html.push('             <h5 class="page-header level-2"></h5>');
+
+                    $.each(item.sf, function(value, item, index) {
+                        html.push('         <div class="form-group sf">');
+                        html.push('             <label class="col-md-2 control-label">厂商:</label>');
+                        html.push('             <div class="col-md-2">');
+                        html.push('                 <select class="form-control vendorSelect" name="vendorid">');
+                        html.push('<option value="">请选择</option>');
+                        $.each(sfs, function(value1, item1, index1) {
+                            if(item.vendorid == item1.vendorid){
+                                html.push("<option  value=" + item1.vendorid + " selected >" + item1.vendorname + "</option>");
+                            }else{
+                                html.push("<option  value=" + item1.vendorid + ">" + item1.vendorname + "</option>");
+                            }
+
+                        });
+                        html.push('             </select>');
+                        html.push('         </div>');
+                        html.push('         <label class="col-md-1 control-label">算法:</label>');
+                        html.push('         <div class="col-md-2">');
+
+                        html.push('             <select class="form-control algidSelect" name="algid">');
+
+                        $.each(sfs, function(value1, item1, index1) {
+                            if(item.vendorid == item1.vendorid){
+
+                                $.each(item1.sf, function(value1, item1, index1) {
+
+                                    if(item.vendorid == item1.vendorid){
+                                        html.push("<option  value=" + item1.algorithmID + " selected >" + item1.name + "</option>");
+                                    }else{
+                                        html.push("<option  value=" + item1.algorithmID + " selected >" + item1.name + "</option>");
+                                    }
+                                });
+                            }
+                        });
+                        html.push('</select>');
+
+                        html.push('</div>');
+                        html.push('<label class="col-md-1 control-label">违法业务:</label>');
+                        html.push('<div class="col-md-2">');
+
+
+                        html.push('<select  class="selectpicker show-tick form-control" multiple data-live-search="false" name="alarm">');
+
+                        if(item.alarm.indexOf("1") > -1){
+                            html.push('<option value="1" selected>大货车闯禁行</option>');
+                        }else{
+                            html.push('<option value="1">大货车闯禁行</option>');
+                        }
+                        if(item.alarm.indexOf("2") > -1){
+                            html.push('<option value="2" selected>危险品车闯禁行</option>');
+                        }else{
+                            html.push('<option value="2">危险品车闯禁行</option>');
+                        }
+                        html.push('</select>');
+                        html.push('</div>');
+                        html.push('<div class="col-md-1">');
+//                        html.push('<a href="javascript:void(0)"  title="删除"><span class="glyphicon glyphicon-remove-circle delete-icons delete-sf" ></span></a>');
+                        html.push('            <a href="javascript:void(0)" title="删除算法"><img src="image/trashcan.png" class="delete-icons delete-sf"></img> </a>');
+                        html.push('</div>');
+                        html.push('</div>');
+
+                    });
+
+                    html.push('</div>');
+                    html.push("</div>");
+                    html.push("</div>");
+
+                });
+
+                $("#timeZone-edit").append(html.join(''));
+                csChangeListener();
+                $(".selectpicker").selectpicker();
+                $(".datetimePicker").datetimepicker({
+                    locale: moment.locale('zh-cn'),
+                    format: "HH:mm"
+                });
+
+                toggleBodyListener();
+                kkTreeListenerAll(data.timeZone);
+                delIconListener();
+                sfAddListener();
+
+
+                $.each(data.timeZone, function(index, item){
+
+                    $("#crossing"+index).val(item.crossingid);
+
+                    $("#crossing"+index+"_").val(item.crossingname);
+
+                    var first = true;
+
+                    $("#crossing"+index+"_").click(function () {
+
+                        if(first){
+                            var treeObj =  $.fn.zTree.getZTreeObj("crossing"+index+"_ul");
+
+                            var crossingids = item.crossingid.split(",");
+
+                            $.each(crossingids,function(index, item){
+                                var node = treeObj.getNodeByParam("id", item, null);
+                                treeObj.checkNode(node, true, true);
+                            });
+                            first = false;
+                        }
+
+
+                    });
+                });
+
+            }
+        });
+
+        timeAddListener();
+
+        $("#row-edit").modal({backdrop: 'static', keyboard: false}).on("shown.bs.modal").on("hide.bs.modal", function() {
+            $("#timeZone").html('');
+        });
+
+    };
+
+
+    function removeRow(index) {
+
+        if(confirm("确认删除吗")){
+
+            var planid = $("#table0").bootstrapTable('getData')[index].id;
+
+            $.ajax({
+                url: "szAlgSched/"+planid,
+                type: "post",
+                data : {_method:"DELETE"},
+                success: function(data) {
+                    alert("删除成功");
+                    $("#table0").bootstrapTable('refresh');
+                },
+                err: function(){
+                    alert("删除失败");
+                }
+            });
+        }
+        else{
+            return;
+        }
+    }
+
+
+    $("#toolbar_add").click(function() {
+        $("#timeZone-edit").html('');
+        $("#planID").val(-1);
+        $("#row-edit").modal().on("shown.bs.modal");
+        timeAddListener();
+        $("#table0").bootstrapTable('refresh');
+
+    });
+
+    function timeAddListener() {
+        $(".time-add").off().click(function() {
+            var html = [];
+            html.push('<div class="panel panel-default" > ');
+            html.push('    <div class="panel-heading">');
+            html.push('        <h3 class="panel-title">时间段');
+//            html.push('            <a href="javascript:void(0)"  title="删除时间段"><span class="glyphicon glyphicon-remove-circle delete-icons delete-timezone" name="executeImmediate" ></span></a>');
+            html.push('            <a href="javascript:void(0)" title="删除时间段" style="margin-left:934px;"><img src="image/trashcan.png" class="delete-timezone"></img> </a>');
+//            html.push('            <a href="#" style="float:right;text-decoration:none" name="toggleBody">>></a>');
+            html.push('            <a href="#" style="float:right;text-decoration:none;" name="toggleBody"><span class="glyphicon glyphicon-chevron-up drop-down-icon" style="display: inline-block"></span></a>');
+            html.push('        </h3>');
+            html.push('    </div>');
+            html.push('    <div class="panel-body timeZoneDiv" >');
+            html.push('<div class="form-group timeZone">');
+            html.push('<label class="col-md-2 control-label">开始时间:</label>');
+            html.push('<div class="col-md-2">');
+            html.push('<input class="form-control datetimePicker" name="begintime" type="text" >');
+            html.push('</div>');
+            html.push('<label class="col-md-1 control-label">结束时间:</label>');
+            html.push('<div class="col-md-2">');
+            html.push('<input class="form-control datetimePicker" name="endtime" type="text" >');
+            html.push('</div>');
+            html.push('<label class="col-md-1 control-label">卡口:</label>');
+            html.push('<div class="col-md-2">');
+            html.push('<input class="form-control" name="crossingid" type="text">' );
+            html.push('</div>');
+            html.push('<div class="col-md-2">');
+            html.push('<button type="button" class="btn-hik-primary  sf-add level-3">新增算法</button>');
+            html.push('</div>');
+            html.push('<h5 class="page-header level-2"></h5>');
+            html.push('</div>');
+            html.push('</div>')
+            html.push('</div>')
+
+            $("#timeZone-edit").append(html.join(''));
+            delIconListener();
+            sfAddListener();
+            kkTreeListener();
+            toggleBodyListener();
+
+            $(".datetimePicker").datetimepicker({
+                locale: moment.locale('zh-cn'),
+                format: "HH:mm"
+            });
+
+            $("[name = 'toggleBody']").click(function(){
+                $(this).rotate(90)
+                $(this).parents(".panel-default").find(".panel-body").slideToggle();
+            });
+
+        });
+    }
+
+    function sfAddListener() {
+
+        $(".sf-add").off().click(function() {
+
+            var html = [];
+            html.push('<div class="form-group sf">');
+            html.push('<label class="col-md-2 control-label">厂商:</label>');
+            html.push('<div class="col-md-2">');
+            html.push('<select class="form-control vendorSelect" name="vendorid">');
+            html.push('<option value="">请选择</option>');
+            $.each(sfs, function(value, item, index) {
+                html.push("<option value=" + item.vendorid + ">" + item.vendorname + "</option>");
+            });
+            html.push('</select>');
+            html.push('</div>');
+            html.push('<label class="col-md-1 control-label">算法:</label>');
+            html.push('<div class="col-md-2">');
+            html.push('<select class="form-control algidSelect" name="algid">');
+            html.push('<option value="">请选择</option>');
+            html.push('</select>');
+            html.push('</div>');
+            html.push('<label class="col-md-1 control-label">违法业务:</label>');
+            html.push('<div class="col-md-2">');
+            html.push('<select  class="selectpicker show-tick form-control" multiple data-live-search="false" name="alarm">');
+            html.push('<option value="1">大货车闯禁行</option>');
+            html.push('<option value="2">危险品车闯禁行</option>');
+            html.push('</select>');
+            html.push('</div>');
+            html.push('<div class="col-md-1">');
+//            html.push('<a href="javascript:void(0)"  title="删除"><span class="glyphicon glyphicon-remove-circle delete-icons delete-sf" ></span></a>');
+            html.push('            <a href="javascript:void(0)" title="删除算法"><img src="image/trashcan.png" class="delete-icons delete-sf"></img> </a>');
+            html.push('</div>');
+            html.push('</div>');
+            $(this).parent().parent().append(html.join(''))
+            csChangeListener();
+            delIconListener();
+            $(".selectpicker").selectpicker();
+            $(this).parent().parent().find(".sf").find("[name='vendorid']").eq(-1).prop('selectedIndex', 1).trigger('change');
+
+        });
+    }
+
+    function csChangeListener(){
+        $(".vendorSelect").change(function() {
+
+            var algidSelect = $(this).parent().siblings().find(".algidSelect");
+
+            var vendorid = $(this).val();
+            algidSelect.html('');
+
+            if(vendorid != "") {
+                var algidList = [];
+                $.each(sfs, function(value, item, index) {
+                    if(item.vendorid == vendorid) {
+                        algidList = item.sf;
+                    }
+                });
+
+                var html1 = [];
+
+                $.each(algidList, function(value, item, index) {
+                    html1.push("<option value=" + item.algorithmID + ">" + item.name + "</option>");
+                });
+                algidSelect.append(html1.join(''));
+            } else {
+                algidSelect.append('<option value="">请选择</option>');
+            }
+        });
+    }
+
+    function delIconListener(){
+
+        $(".delete-timezone").click(function(){
+            var obj = $(this).parent().parent().parent().parent();
+            obj.slideToggle(1000);
+            setInterval(function(){
+                obj.remove();
+            },1100);
+
+        });
+
+        $(".delete-sf").click(function(){
+            var obj = $(this).parent().parent().parent();
+            obj.slideToggle(500);
+            setInterval(function(){
+                obj.remove();
+            },600);
+        });
+
+    }
+
+
+    function executeImmediateListener(){
+
+        $("[name='executeImmediate']").click(function(){
+
+            var id = $(this).children("[name='timeZoneID']").val();
+            $.ajax({
+                url:"executeTimeTasks/"+id,
+                success:function(data){
+                    data =  JSON.parse(data);
+
+                    if(data.ecode == 0){
+                        alert("任务已启动");
+                    }else{
+                        alert("任务启动错误,错误原因："+data.msg);
+                    }
+                },
+                err:function(){
+                    alert("任务启动错误,错误原因：未知");
+                }
+            });
+
+        });
+    }
+
+    function toggleBodyListener(){
+        $("[name = 'toggleBody']").click(function(){
+            if($(this).children(".glyphicon-chevron-up").hasClass("drop-is-reverse")){
+                $(this).children(".glyphicon-chevron-up").removeClass("drop-is-reverse")
+            }else{
+                $(this).children(".glyphicon-chevron-up").addClass("drop-is-reverse")
+            }
+            $(this).parents(".panel-default").find(".panel-body").slideToggle();
+        });
+    }
+
+
+    function kkTreeListenerAll(timeZone){
+
+        $('[name="crossingid"]').zselect({
+            type:"tree",
+            hasQuery: true,
+            treeSetting:{
+//                hasCache: true,
+//                data:{"retcode":0,"text":"","image":"","value":{"data":"[{\"id\":100005,\"indexCode\":\"180427023727056499\",\"name\":\"子组织01\",\"type\":\"controlUnit\",\"parentId\":100001,\"icon\":\"image/organization.png\",\"open\":false,\"checked\":false,\"isLeaf\":0,\"isParent\":true,\"children\":[{\"id\":4,\"indexCode\":\"458204231\",\"name\":\"test2\",\"type\":\"CrossInfo\",\"parentId\":100005,\"icon\":\"image/cross.png\",\"open\":false,\"checked\":false,\"isLeaf\":1,\"isParent\":false}]}]"}},
+                url: "trafficCrossingInfo",
+//                url: "js/index4.json",
+                setting:{
+                    view: {
+                        showLine: false
+                    },
+                    check: {
+                        chkboxType: {
+                            "Y": "ps",
+                            "N": "ps"
+                        },
+                        chkStyle: "checkbox",
+                        enable: true
+                    }
+                },
+                buttons : {
+                    submit: {
+                        filter: "CrossInfo"
+                    }
+                }
+            }
+
+        });
+    }
+
+
+    function kkTreeListener(){
+        $('[name="crossingid"]').eq(-1).zselect({
+            type:"tree",
+            hasQuery: true,
+            treeSetting:{
+//                hasCache: true,
+//                data:{"retcode":0,"text":"","image":"","value":{"data":"[{\"id\":100005,\"indexCode\":\"180427023727056499\",\"name\":\"子组织01\",\"type\":\"controlUnit\",\"parentId\":100001,\"icon\":\"image/organization.png\",\"open\":false,\"checked\":false,\"isLeaf\":0,\"isParent\":true,\"children\":[{\"id\":4,\"indexCode\":\"458204231\",\"name\":\"test2\",\"type\":\"CrossInfo\",\"parentId\":100005,\"icon\":\"image/cross.png\",\"open\":false,\"checked\":false,\"isLeaf\":1,\"isParent\":false}]}]"}},
+                url: "trafficCrossingInfo",
+//                url: "js/index4.json",
+                setting:{
+                    view: {
+                        showLine: false
+                    },
+                    check: {
+                        chkboxType: {
+                            "Y": "ps",
+                            "N": "ps"
+                        },
+                        chkStyle: "checkbox",
+                        enable: true
+                    }
+                },
+                buttons : {
+                    submit: {
+                        filter: "CrossInfo"
+                    }
+                }
+            }
+
+        });
+    }
+
+
+    function checkForm(){
+
+        if($("#name").val() == "") {
+            alert("计划名称不能为空");
+            $("#name").focus();
+            return false;
+        }else if($("#begindate").val() == ""){
+            alert("开始日期不能为空");
+            $("#begindate").trigger("click");
+            return false;
+        }else if($("#enddate").val() == ""){
+            alert("结束日期不能为空");
+            $("#enddate").focus();
+            return false;
+        }else if($("#begindate").val() > $("#enddate").val()){
+            alert("结束日期必须大于开始日期");
+            $("#enddate").focus();
+            return false;
+        }
+
+        var check = true;
+
+        var timeZoneEdits = $("#timeZone-edit").find(".timeZone");
+
+        for(var i = 0; i< timeZoneEdits.length ; i++){
+
+            if(timeZoneEdits.eq(i).find('[name="begintime"]').val() == ""){
+                alert("开始时间不能为空");
+                timeZoneEdits.eq(i).find('[name="begintime"]').focus();
+                check = false;
+                return false;
+            }else if(timeZoneEdits.eq(i).find('[name="endtime"]').val() == ""){
+                alert("结束时间不能为空");
+                timeZoneEdits.eq(i).find('[name="endtime"]').focus();
+                check = false;
+                return false;
+            }else if(timeZoneEdits.eq(i).find('[name="crossingid"]').val() == ""){
+//            }else if(timeZoneEdits.eq(i).find('[name="crossingid"]').val() == ""){
+                alert("卡口不能为空");
+                timeZoneEdits.eq(i).find('[name="crossingid"]').focus();
+                check = false;
+                return false;
+            }else if(timeZoneEdits.find('[name="begintime"]').val() > timeZoneEdits.find('[name="endtime"]').val()){
+                alert("开始时间不能大于结束时间");
+                timeZoneEdits.find('[name="endtime"]').focus();
+                check = false;
+                return false;
+            }
+        }
+
+        return check;
+
+    }
+
+
+
+    $("#btn_submit").click(function(){
+
+
+        if(checkForm()){
+            var data = {};
+
+            data["id"] = $("#planID").val();
+            data["name"] = $("#name").val();
+            data["begindate"] = $("#begindate").val();
+            data["enddate"] = $("#enddate").val();
+
+            var timeZone = [];
+            var timeZoneTmp = {};
+            var sfs = [];
+
+            $.each($("#timeZone-edit").find(".timeZone"), function(value,item,index) {
+
+                $.each($(item).children("div").children("input"), function(value1,item1,index1) {
+                    timeZoneTmp[$(item1).attr("name")] = $(item1).val();
+                });
+
+                $.each($(item).find(".sf"), function(value1,item1,index1) {
+
+                    var sf = {}
+                    sf["vendorid"] = $(item1).find("[name='vendorid']").val();
+                    sf["algid"] = $(item1).find("[name='algid']").val();
+                    sf["alarm"] = $(item1).find("[name='alarm']").val().join(',');
+                    sfs.push(sf);
+                });
+                timeZoneTmp["sf"] = sfs;
+                timeZone.push(timeZoneTmp);
+                sfs = [];
+                timeZoneTmp = {};
+            });
+
+            data["timeZone"] = timeZone;
+
+            $.ajax({
+                url:"szAlgSched",
+                data: JSON.stringify(data),
+                type : 'post',
+                contentType: 'application/json',
+                success:function(){
+                    alert("保存成功");
+                    $("#table0").bootstrapTable('refresh');
+                },
+                err:function(){
+                    alert("保存失败");
+                }
+            });
+        }else{
+            return false;
+        }
+
+    });
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Object.seal</title>
+</head>
+<body>
+<script>
+    var obj={
+        x:1,
+        y:2,
+        username:"xu"
+    }
+    obj.age=24;
+    delete obj.x;
+    var o=Object.seal(obj); //true
+    console.log(obj===o); //true
+    console.log(Object.isExtensible(o)); //false  不可扩展
+    obj.y=55;
+    console.log(obj.y); //55 已有属性可改
+    // Object.defineProperty(obj,"username",{
+    //     get:function () {
+    //         return "this is a test";
+    //     }
+    // });//因为不可扩展 所以找不到 username属性
+    o.z=99;
+    console.log(o.z);//undefined 不可扩展 找不到o.z属性
+    console.log(o.username);//xu
+    delete o.username;
+    console.log(o.username);//不可扩展  删除无效
+    // Object.defineProperties(obj,"username",{value:"queen"});//封闭了  无法修改
+    console.log(Object.isSealed(o));//判断是否封闭  true 封闭状态
+    console.log(o.username);//xu
+    console.log(Object.getOwnPropertyDescriptor(obj,'username'));
+    //{value: "xu", writable: true, enumerable: true, configurable: false}
+    // configurable: false  不可配置
+
+</script>
+</body>
+</html>
